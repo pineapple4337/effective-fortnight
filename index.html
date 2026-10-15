@@ -1,936 +1,495 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full bg-black text-[#E5E0D8]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenJio — Admissions Portfolio Tracker & AI School-Fit Scan</title>
-
-    <!-- Tailwind CSS -->
+    <title>OpenJio — Admissions Record & Planner</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts: Playfair Display, Merriweather, Source Serif 4 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
-
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            navy: '#0F1E36',
-                            cream: '#FAF7F2',
-                            sand: '#F3EDE2',
-                            gold: '#C5A059',
-                            goldHover: '#B08C45',
-                            slate: '#334155',
-                            muted: '#64748B',
-                            border: '#E2D9CC'
-                        }
-                    },
-                    fontFamily: {
-                        playfair: ['"Playfair Display"', 'Georgia', 'serif'],
-                        merriweather: ['"Merriweather"', 'serif'],
-                        serif: ['"Source Serif 4"', 'Georgia', 'serif']
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        .font-serif-display {
+            font-family: 'Instrument Serif', Georgia, serif;
+            letter-spacing: -0.015em;
+        }
         body {
-            font-family: 'Source Serif 4', Georgia, serif;
-            background-color: #FAF7F2;
-            color: #0F1E36;
-        }
-
-        h1, h2, h3, .font-heading {
-            font-family: 'Playfair Display', Georgia, serif;
-        }
-
-        .font-subheading {
-            font-family: 'Merriweather', Georgia, serif;
-        }
-
-        /* Custom scrollbars */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F3EDE2;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #C5A059;
-            border-radius: 4px;
-        }
-
-        /* Subtle gold borders and shadows */
-        .card-editorial {
-            background-color: #FFFFFF;
-            border: 1px solid #E2D9CC;
-            box-shadow: 0 4px 20px -2px rgba(15, 30, 54, 0.05);
-            transition: all 0.25s ease;
-        }
-        .card-editorial:hover {
-            box-shadow: 0 8px 30px -4px rgba(15, 30, 54, 0.1);
-            border-color: #C5A059;
-        }
-
-        .gold-gradient {
-            background: linear-gradient(135deg, #C5A059 0%, #E3C488 50%, #B08C45 100%);
-        }
-
-        .badge-stage {
-            border: 1px solid rgba(197, 160, 89, 0.4);
-            background: rgba(197, 160, 89, 0.08);
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="h-full flex flex-col md:flex-row antialiased bg-black text-[#E5E0D8] selection:bg-[#E5E0D8] selection:text-black">
 
-    <!-- Top Announcement Bar -->
-    <div class="bg-brand-navy text-brand-sand text-xs md:text-sm py-2 px-4 text-center border-b border-brand-gold/30">
-        <span class="font-subheading font-medium text-brand-gold">MOE DSA-Sec 2026 Update:</span>
-        Track your child's record from Primary 4 to University. No promised places — just clarity and zero trial-and-error.
-        <a href="#pricing-section" class="underline ml-2 hover:text-white font-semibold">Explore Milestone Plans &rarr;</a>
-    </div>
-
-    <!-- Navigation Header -->
-    <header class="bg-white border-b border-brand-border sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Brand Title & Tagline -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-full bg-brand-navy text-brand-gold flex items-center justify-center font-playfair font-bold text-xl shadow-md border border-brand-gold">
-                        O
-                    </div>
-                    <div>
-                        <a href="#" class="font-playfair text-2xl md:text-3xl font-bold tracking-tight text-brand-navy hover:opacity-90">OpenJio</a>
-                        <p class="text-xs text-brand-muted hidden sm:block italic font-serif">Every admissions record, deadline and next step in one place.</p>
-                    </div>
-                </div>
-
-                <!-- Stage Switcher Dropdown -->
-                <div class="hidden md:flex items-center space-x-2 bg-brand-sand/60 px-3 py-1.5 rounded-lg border border-brand-border">
-                    <span class="text-xs uppercase tracking-wider text-brand-muted font-sans font-semibold">Active Pipeline:</span>
-                    <select id="stageSelector" onchange="changePipelineStage(this.value)" class="bg-transparent font-subheading text-xs font-bold text-brand-navy focus:outline-none cursor-pointer">
-                        <option value="p4-p6" selected>P4 – P6: DSA-Secondary (Current Target)</option>
-                        <option value="sec3-sec5">Sec 3 – 4/5: DSA-JC & Poly EAE</option>
-                        <option value="jc-poly-ns">JC / Poly / NS: Uni Aptitude & Scholarships</option>
-                    </select>
-                </div>
-
-                <!-- Navigation Tabs -->
-                <nav class="hidden lg:flex space-x-6 text-sm font-subheading font-medium">
-                    <button onclick="switchTab('vault')" id="nav-vault" class="text-brand-gold border-b-2 border-brand-gold pb-1 font-bold">Portfolio Vault</button>
-                    <button onclick="switchTab('scan')" id="nav-scan" class="text-brand-navy hover:text-brand-gold transition-colors pb-1">AI Fit Scan</button>
-                    <button onclick="switchTab('calendar')" id="nav-calendar" class="text-brand-navy hover:text-brand-gold transition-colors pb-1">Timeline & Dates</button>
-                    <button onclick="switchTab('directory')" id="nav-directory" class="text-brand-navy hover:text-brand-gold transition-colors pb-1">Partner Centres</button>
-                    <button onclick="switchTab('pricing')" id="nav-pricing" class="text-brand-navy hover:text-brand-gold transition-colors pb-1">Plans & Consults</button>
-                </nav>
-
-                <!-- Actions -->
-                <div class="flex items-center space-x-3">
-                    <span id="userTierBadge" class="hidden sm:inline-block badge-stage text-brand-navy text-xs px-3 py-1 rounded-full font-sans font-bold">
-                        Free Tier
-                    </span>
-                    <button onclick="openModal('addAchievementModal')" class="bg-brand-navy text-brand-sand hover:bg-brand-gold hover:text-brand-navy transition-all px-4 py-2 rounded text-xs md:text-sm font-subheading font-semibold shadow flex items-center space-x-2">
-                        <i class="fa-solid fa-plus text-xs"></i>
-                        <span>Add Achievement</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Navigation Sub-bar -->
-            <div class="lg:hidden flex overflow-x-auto py-2 border-t border-brand-border/50 text-xs font-subheading space-x-4 no-scrollbar">
-                <button onclick="switchTab('vault')" id="mobile-nav-vault" class="whitespace-nowrap font-bold text-brand-gold">Vault</button>
-                <button onclick="switchTab('scan')" id="mobile-nav-scan" class="whitespace-nowrap text-brand-navy">AI Fit Scan</button>
-                <button onclick="switchTab('calendar')" id="mobile-nav-calendar" class="whitespace-nowrap text-brand-navy">Calendar</button>
-                <button onclick="switchTab('directory')" id="mobile-nav-directory" class="whitespace-nowrap text-brand-navy">Partners</button>
-                <button onclick="switchTab('pricing')" id="mobile-nav-pricing" class="whitespace-nowrap text-brand-navy">Plans</button>
-            </div>
-        </div>
-    </header>
-
-    <!-- MAIN CONTAINER -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
-
-        <!-- Banner context alert -->
-        <div id="stageBanner" class="bg-white border-l-4 border-brand-gold p-4 rounded-r shadow-sm mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-                <span class="text-xs font-sans uppercase tracking-widest text-brand-gold font-bold">Current Target Stage</span>
-                <h2 id="stageTitle" class="text-xl font-playfair font-bold text-brand-navy">P4 to P6: Direct School Admission (DSA-Sec)</h2>
-                <p id="stageSubtitle" class="text-xs text-brand-muted font-serif italic">Tracking Singapore primary school talent domain portfolios (Sports, Leadership, STEM, Arts) before MOE Portal opening in May.</p>
-            </div>
-            <div class="flex items-center space-x-4">
-                <div class="text-right">
-                    <p class="text-xs text-brand-muted uppercase font-sans font-semibold">Vault Items</p>
-                    <p id="vaultCount" class="text-2xl font-playfair font-bold text-brand-navy">5 / 10</p>
-                </div>
-                <div class="text-right border-l border-brand-border pl-4">
-                    <p class="text-xs text-brand-muted uppercase font-sans font-semibold">Fit Index</p>
-                    <p id="fitIndexScore" class="text-2xl font-playfair font-bold text-brand-gold">78%</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== TAB 1: PORTFOLIO VAULT ==================== -->
-        <section id="tab-vault" class="tab-content block">
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4">
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="w-full md:w-72 bg-neutral-950 border-r border-neutral-800 flex flex-col justify-between p-6 shrink-0">
+        <div>
+            <!-- Brand -->
+            <div class="flex items-center gap-3 mb-10">
+                <div class="w-8 h-8 rounded bg-[#E5E0D8] text-black flex items-center justify-center font-serif-display text-xl font-bold">O</div>
                 <div>
-                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-brand-navy">Child's Portfolio Vault</h2>
-                    <p class="text-sm text-brand-muted font-serif">Centralised, evidence-backed proof of outside wins, school appointments, and competition certificates.</p>
-                </div>
-                
-                <!-- Filters -->
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-sans font-semibold text-brand-muted uppercase">Filter Domain:</span>
-                    <button onclick="filterVault('all')" class="vault-filter-btn px-3 py-1 text-xs rounded-full bg-brand-navy text-white font-sans font-medium" data-cat="all">All (5)</button>
-                    <button onclick="filterVault('Leadership')" class="vault-filter-btn px-3 py-1 text-xs rounded-full bg-brand-sand text-brand-navy font-sans font-medium hover:bg-brand-gold/20" data-cat="Leadership">Leadership</button>
-                    <button onclick="filterVault('STEM')" class="vault-filter-btn px-3 py-1 text-xs rounded-full bg-brand-sand text-brand-navy font-sans font-medium hover:bg-brand-gold/20" data-cat="STEM">STEM & Innovation</button>
-                    <button onclick="filterVault('Sports')" class="vault-filter-btn px-3 py-1 text-xs rounded-full bg-brand-sand text-brand-navy font-sans font-medium hover:bg-brand-gold/20" data-cat="Sports">Sports</button>
-                    <button onclick="filterVault('Arts')" class="vault-filter-btn px-3 py-1 text-xs rounded-full bg-brand-sand text-brand-navy font-sans font-medium hover:bg-brand-gold/20" data-cat="Arts">Arts & Culture</button>
+                    <h1 class="font-serif-display text-2xl font-normal tracking-wide text-[#E5E0D8]">OpenJio</h1>
+                    <p class="text-xs text-neutral-400">Admissions & Portfolio Planner</p>
                 </div>
             </div>
 
-            <!-- Readiness Progress Gauges -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="card-editorial p-5 rounded-lg border-t-2 border-t-brand-navy">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-xs font-sans uppercase tracking-wider text-brand-muted font-bold">Leadership & Service</span>
-                        <span class="text-xs font-bold text-brand-navy">High Depth</span>
-                    </div>
-                    <div class="w-full bg-brand-sand rounded-full h-2 mb-3">
-                        <div class="bg-brand-navy h-2 rounded-full" style="width: 85%"></div>
-                    </div>
-                    <p class="text-xs text-brand-muted font-serif">Head Prefect, Student Council Chair, CCA Vice-Captain logged.</p>
-                </div>
+            <!-- Navigation Links -->
+            <nav class="space-y-1.5" id="nav-tabs">
+                <button onclick="switchTab('vault')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors bg-[#E5E0D8] text-black">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    Portfolio Vault
+                </button>
+                <button onclick="switchTab('scanner')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-400 hover:text-[#E5E0D8] hover:bg-neutral-900">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012-2m-6 9l2 2 4-4"/></svg>
+                    AI School-Fit Scan
+                </button>
+                <button onclick="switchTab('timeline')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-400 hover:text-[#E5E0D8] hover:bg-neutral-900">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    Admissions Timeline
+                </button>
+                <button onclick="switchTab('pricing')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-400 hover:text-[#E5E0D8] hover:bg-neutral-900">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                    Plans & Consults
+                </button>
+                <button onclick="switchTab('partners')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-400 hover:text-[#E5E0D8] hover:bg-neutral-900">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    Partner Directory
+                </button>
+            </nav>
+        </div>
 
-                <div class="card-editorial p-5 rounded-lg border-t-2 border-t-brand-gold">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-xs font-sans uppercase tracking-wider text-brand-muted font-bold">STEM & Olympiads</span>
-                        <span class="text-xs font-bold text-brand-gold">Moderate</span>
-                    </div>
-                    <div class="w-full bg-brand-sand rounded-full h-2 mb-3">
-                        <div class="bg-brand-gold h-2 rounded-full" style="width: 60%"></div>
-                    </div>
-                    <p class="text-xs text-brand-muted font-serif">NMOS Silver, Robotics National 2nd Place logged. Need 1 write-up.</p>
-                </div>
+        <!-- Admissions Stage Selector -->
+        <div class="pt-6 border-t border-neutral-800">
+            <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Admissions Stage</label>
+            <select id="stageSelect" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
+                <option value="p4-p6">P4 to P6 (DSA-Sec Window)</option>
+                <option value="sec3-4">Sec 3 to 4 (DSA-JC / Poly EAE)</option>
+                <option value="jc-uni">JC / Poly / NS (Uni Admissions)</option>
+            </select>
+        </div>
+    </aside>
 
-                <div class="card-editorial p-5 rounded-lg border-t-2 border-t-emerald-600">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-xs font-sans uppercase tracking-wider text-brand-muted font-bold">Outside Wins (Non-MOE logged)</span>
-                        <span class="text-xs font-bold text-emerald-700">Crucial Gap Filled</span>
-                    </div>
-                    <div class="w-full bg-brand-sand rounded-full h-2 mb-3">
-                        <div class="bg-emerald-600 h-2 rounded-full" style="width: 90%"></div>
-                    </div>
-                    <p class="text-xs text-brand-muted font-serif">3 non-school competition certificates verified with PDF proofs.</p>
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 overflow-y-auto p-6 md:p-12">
+        
+        <!-- SECTION: PORTFOLIO VAULT -->
+        <section id="tab-vault" class="tab-content max-w-5xl mx-auto space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-800 pb-6">
+                <div>
+                    <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">Portfolio Vault</h2>
+                    <p class="text-neutral-400 text-sm mt-1">One secure record holding outside wins, certificates, and CCA milestones from P4 to university[cite: 1].</p>
+                </div>
+                <button onclick="openAddModal()" class="bg-[#E5E0D8] text-black hover:bg-neutral-200 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 self-start">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    Add Achievement
+                </button>
+            </div>
+
+            <!-- Vault Summary Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
+                    <div class="text-neutral-400 text-xs uppercase tracking-wider mb-1">Total Verified Records</div>
+                    <div id="statTotal" class="font-serif-display text-3xl text-[#E5E0D8]">6 Items</div>
+                    <div class="text-xs text-neutral-400 mt-2">Max 10 recommended for DSA portal entry</div>
+                </div>
+                <div class="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
+                    <div class="text-neutral-400 text-xs uppercase tracking-wider mb-1">Primary Domain</div>
+                    <div class="font-serif-display text-3xl text-[#E5E0D8]">STEM & Innovation</div>
+                    <div class="text-xs text-neutral-400 mt-2">Robotics & Applied Programming</div>
+                </div>
+                <div class="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
+                    <div class="text-neutral-400 text-xs uppercase tracking-wider mb-1">Vault Status</div>
+                    <div class="font-serif-display text-3xl text-[#E5E0D8]">PDPA Secure</div>
+                    <div class="text-xs text-neutral-400 mt-2">Parent-controlled data repository</div>
                 </div>
             </div>
 
-            <!-- Vault Records Grid -->
-            <div id="vaultGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dynamically Rendered -->
-            </div>
-        </section>
-
-        <!-- ==================== TAB 2: AI SCHOOL-FIT SCAN ==================== -->
-        <section id="tab-scan" class="tab-content hidden">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-8">
-                    <span class="badge-stage text-brand-navy text-xs uppercase px-3 py-1 rounded-full font-sans font-bold">Simulated AI Diagnostic Engine</span>
-                    <h2 class="text-3xl md:text-4xl font-playfair font-bold text-brand-navy mt-2">AI School-Fit Diagnostics</h2>
-                    <p class="text-sm text-brand-muted font-serif max-w-2xl mx-auto mt-1">
-                        Select a target school and domain. Our scanning engine cross-references your child's Vault items against past selection benchmarks and MOE criteria.
-                    </p>
+            <!-- Records Table -->
+            <div class="bg-neutral-950 border border-neutral-800 rounded-xl overflow-hidden">
+                <div class="p-4 border-b border-neutral-800 flex items-center justify-between">
+                    <span class="text-sm font-medium text-[#E5E0D8]">Logged Achievements & Evidence</span>
+                    <span class="text-xs text-neutral-400" id="recordCount">Showing 6 records</span>
                 </div>
-
-                <!-- Scan Controls Form -->
-                <div class="card-editorial p-6 rounded-xl mb-8 border border-brand-gold/40">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label class="block text-xs font-sans font-bold text-brand-navy uppercase mb-2">Target Institution</label>
-                            <select id="targetSchoolSelect" class="w-full bg-brand-sand/50 border border-brand-border rounded p-3 font-subheading text-sm text-brand-navy focus:outline-none focus:border-brand-gold">
-                                <option value="RI">Raffles Institution (RI) — DSA-Sec</option>
-                                <option value="HCI">Hwa Chong Institution (HCI) — DSA-Sec</option>
-                                <option value="ACSI">Anglo-Chinese School (Independent) — IB / DSA</option>
-                                <option value="NYGH">Nanyang Girls' High School — DSA-Sec</option>
-                                <option value="SST">School of Science & Technology (SST) — Portfolio/STEM</option>
-                                <option value="SOTA">School of the Arts (SOTA) — Visual/Performing Arts</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-sans font-bold text-brand-navy uppercase mb-2">Target Talent Domain</label>
-                            <select id="targetDomainSelect" class="w-full bg-brand-sand/50 border border-brand-border rounded p-3 font-subheading text-sm text-brand-navy focus:outline-none focus:border-brand-gold">
-                                <option value="Leadership">Leadership & Character Excellence</option>
-                                <option value="STEM">Science, Mathematics & Innovation</option>
-                                <option value="Sports">Sports Talent & Athletics</option>
-                                <option value="Bilingualism">Bilingualism & Humanities</option>
-                                <option value="Arts">Performing & Visual Arts</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button onclick="runAIScan()" class="w-full gold-gradient text-brand-navy font-subheading font-bold py-3.5 rounded-lg shadow-md hover:opacity-95 transition-all flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>Run Full Portfolio Fit Scan</span>
-                    </button>
-                </div>
-
-                <!-- Scan Results Display Container -->
-                <div id="aiScanResults" class="space-y-6">
-                    <!-- Default Initial State -->
-                    <div class="card-editorial p-8 rounded-xl text-center bg-white border border-dashed border-brand-gold">
-                        <i class="fa-solid fa-robot text-4xl text-brand-gold mb-3"></i>
-                        <h3 class="font-playfair text-xl font-bold text-brand-navy">Ready to Scan</h3>
-                        <p class="text-xs text-brand-muted font-serif max-w-md mx-auto mt-1">Select institution and talent domain above, then click 'Run Full Portfolio Fit Scan' to analyze matching evidence and missing gaps.</p>
-                    </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-neutral-900 text-neutral-400 text-xs uppercase tracking-wider border-b border-neutral-800">
+                            <tr>
+                                <th class="p-4">Title & Description</th>
+                                <th class="p-4">Category</th>
+                                <th class="p-4">Date / Year</th>
+                                <th class="p-4">Verification</th>
+                                <th class="p-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="portfolioTableBody" class="divide-y divide-neutral-800 text-neutral-300">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== TAB 3: CALENDAR & TIMELINE ==================== -->
-        <section id="tab-calendar" class="tab-content hidden">
-            <div class="max-w-5xl mx-auto">
-                <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+        <!-- SECTION: AI SCHOOL FIT SCAN -->
+        <section id="tab-scanner" class="tab-content max-w-5xl mx-auto space-y-8 hidden">
+            <div class="border-b border-neutral-800 pb-6">
+                <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">AI School-Fit Scan</h2>
+                <p class="text-neutral-400 text-sm mt-1">Analyze your child's portfolio vault against Singapore secondary schools and DSA talent areas[cite: 1].</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Scan Control Panel -->
+                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl space-y-4 md:col-span-1">
+                    <h3 class="font-serif-display text-2xl text-[#E5E0D8]">Select Target School</h3>
                     <div>
-                        <h2 class="text-2xl md:text-3xl font-playfair font-bold text-brand-navy">MOE Admissions Master Timeline</h2>
-                        <p class="text-sm text-brand-muted font-serif">Fixed national dates for DSA-Sec 2026 / 2027. Never miss a submission window.</p>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2">School & Domain</label>
+                        <select id="targetSchoolSelect" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-3 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
+                            <option value="hci">Raffles Institution / HCI — Robotics & Coding</option>
+                            <option value="acs">ACS (Independent) — Mathematics / STEM</option>
+                            <option value="nygh">Nanyang Girls' High — Info-Comm Technology</option>
+                            <option value="sst">School of Science and Technology — Applied Sciences</option>
+                        </select>
                     </div>
-                    <div class="bg-brand-navy text-brand-sand p-4 rounded-lg shadow text-center md:text-right">
-                        <span class="text-xs uppercase font-sans text-brand-gold font-bold block">Days Until MOE Portal Opens</span>
-                        <span class="font-playfair text-2xl font-bold text-white">21 Days Left</span>
+                    <button onclick="runAiScan()" class="w-full bg-[#E5E0D8] text-black hover:bg-neutral-200 py-3 rounded-lg text-sm font-medium transition-colors">
+                        Run Compatibility Scan
+                    </button>
+                    <div class="p-3 bg-neutral-900 rounded-lg border border-neutral-800 text-xs text-neutral-400 leading-relaxed">
+                        <strong class="text-[#E5E0D8]">Note:</strong> AI scanner evaluates depth of sustained involvement, competition wins, and alignment with MOE DSA selection criteria.
                     </div>
                 </div>
 
-                <!-- Timeline Visual Steps -->
-                <div class="relative border-l-2 border-brand-gold pl-6 space-y-8 my-8 ml-4">
-                    <!-- Step 1 -->
-                    <div class="relative group">
-                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-brand-gold border-4 border-white shadow"></div>
-                        <div class="card-editorial p-5 rounded-lg">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                                <span class="text-xs font-sans font-bold text-brand-gold uppercase">Stage 1 — Early Discovery (Jan – Apr)</span>
-                                <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-0.5 rounded-full font-sans font-semibold">Active Phase</span>
+                <!-- Scan Results Panel -->
+                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl space-y-6 md:col-span-2 flex flex-col justify-between" id="scanResultsContainer">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+                            <div>
+                                <span class="text-xs uppercase tracking-wider text-neutral-400">Match Compatibility Score</span>
+                                <h3 id="resultSchoolName" class="font-serif-display text-3xl text-[#E5E0D8] mt-1">Raffles Institution / HCI</h3>
                             </div>
-                            <h3 class="font-playfair text-lg font-bold text-brand-navy">School Open Houses & Portfolio Consolidation</h3>
-                            <p class="text-xs text-brand-muted font-serif mt-1">Attend target school open houses, consolidate external competition certificates into OpenJio Vault, and refine personal statement write-ups.</p>
+                            <div id="resultScoreBadge" class="px-4 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-2xl font-serif-display text-[#E5E0D8]">84% Match</div>
+                        </div>
+
+                        <div class="mt-6 space-y-4">
+                            <div>
+                                <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">Portfolio Strengths</h4>
+                                <ul id="resultStrengths" class="space-y-2 text-sm text-neutral-300">
+                                    <li class="flex items-start gap-2">✓ Strong sustained leadership in infocomm club across P4 to P5.</li>
+                                    <li class="flex items-start gap-2">✓ Verified national coding competition podium finish.</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">Identified Gaps & Recommended Next Steps</h4>
+                                <ul id="resultGaps" class="space-y-2 text-sm text-neutral-300">
+                                    <li class="flex items-start gap-2">⚠ Missing community service or CIP documentation in tech outreach.</li>
+                                    <li class="flex items-start gap-2">➔ Recommendation: Complete 1 more structured project before May trials.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Step 2 -->
-                    <div class="relative group">
-                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-brand-sand border-2 border-brand-gold shadow"></div>
-                        <div class="card-editorial p-5 rounded-lg">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                                <span class="text-xs font-sans font-bold text-brand-navy uppercase">Stage 2 — Official Submission (Early May – Early Jun)</span>
-                                <span class="bg-brand-sand text-brand-navy text-xs px-2.5 py-0.5 rounded-full font-sans font-semibold">Upcoming</span>
-                            </div>
-                            <h3 class="font-playfair text-lg font-bold text-brand-navy">MOE Centralised DSA Portal Application</h3>
-                            <p class="text-xs text-brand-muted font-serif mt-1">Apply for up to 3 school choices and talent areas via Singpass. Free tier reminders will trigger 7 days before closure.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="relative group">
-                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-brand-sand border-2 border-brand-border"></div>
-                        <div class="card-editorial p-5 rounded-lg opacity-85">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                                <span class="text-xs font-sans font-bold text-brand-muted uppercase">Stage 3 — Trials & Interviews (Jul – Aug)</span>
-                                <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-0.5 rounded-full font-sans font-semibold">Scheduled</span>
-                            </div>
-                            <h3 class="font-playfair text-lg font-bold text-brand-navy">In-Person School Trials & Interview Selection</h3>
-                            <p class="text-xs text-brand-muted font-serif mt-1">Shortlisted candidates attend trials, auditions or interviews. Pro/Elite users receive 1-on-1 milestone mock prep consults.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="relative group">
-                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-brand-sand border-2 border-brand-border"></div>
-                        <div class="card-editorial p-5 rounded-lg opacity-85">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                                <span class="text-xs font-sans font-bold text-brand-muted uppercase">Stage 4 — Offers & School Preference (Oct – Nov)</span>
-                                <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-0.5 rounded-full font-sans font-semibold">Final Stage</span>
-                            </div>
-                            <h3 class="font-playfair text-lg font-bold text-brand-navy">Direct School Placement Offers (CO / WL)</h3>
-                            <p class="text-xs text-brand-muted font-serif mt-1">Receive Confirmed Offers (CO) or Wait List (WL) results. Submit school preferences online before PSLE results release.</p>
-                        </div>
+                    <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400">
+                        <span>Scanned against 2026 MOE criteria dataset</span>
+                        <button onclick="switchTab('pricing')" class="text-[#E5E0D8] underline hover:text-white">Unlock full Pro report & AI reasoning →</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== TAB 4: PARTNER CENTRES DIRECTORY ==================== -->
-        <section id="tab-directory" class="tab-content hidden">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-8">
-                    <span class="badge-stage text-brand-navy text-xs uppercase px-3 py-1 rounded-full font-sans font-bold">Vetted Partner Network</span>
-                    <h2 class="text-3xl font-playfair font-bold text-brand-navy mt-2">Enrichment & Talent Partner Directory</h2>
-                    <p class="text-xs sm:text-sm text-brand-muted font-serif max-w-2xl mx-auto mt-1">
-                        Transparently vetted Singapore enrichment centres specializing in DSA domains. OpenJio earns a standard referral fee from partners — clear labels, zero hidden deals.
-                    </p>
+        <!-- SECTION: ADMISSIONS TIMELINE -->
+        <section id="tab-timeline" class="tab-content max-w-5xl mx-auto space-y-8 hidden">
+            <div class="border-b border-neutral-800 pb-6">
+                <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">Admissions Timeline & Milestones</h2>
+                <p class="text-neutral-400 text-sm mt-1">Key dates for DSA-Sec, school applications, trials, and portfolio locks[cite: 1].</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-700 text-xs rounded text-[#E5E0D8]">Milestone 1</span>
+                            <span class="text-xs text-neutral-400">January — April (P5 / P6)</span>
+                        </div>
+                        <h3 class="font-serif-display text-2xl text-[#E5E0D8] mt-1">Portfolio Vault Completion & Initial AI Scan</h3>
+                        <p class="text-sm text-neutral-400 mt-1">Finalize outside awards, verify CCA records, and run school-fit diagnostics.</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-emerald-400 bg-emerald-950 border border-emerald-800 px-3 py-1.5 rounded-lg inline-block">Completed</span>
+                    </div>
                 </div>
 
-                <!-- Directory Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Partner 1 -->
-                    <div class="card-editorial rounded-lg p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-start mb-3">
-                                <span class="text-[10px] font-sans font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Partner (Referral Fee Labeled)</span>
-                                <span class="text-xs font-bold text-brand-gold"><i class="fa-solid fa-star text-amber-500"></i> 4.9 (120 reviews)</span>
-                            </div>
-                            <h3 class="font-playfair text-xl font-bold text-brand-navy">Apex Olympiad Academy</h3>
-                            <p class="text-xs text-brand-gold font-sans font-semibold mb-2">Math & Science Olympiad Specialist (NMOS / SMOPS)</p>
-                            <p class="text-xs text-brand-muted font-serif mb-4">Focuses on high-tier Primary 4-6 students targeting RI, HCI, and SST DSA STEM domains through competition mastery.</p>
+                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-[#E5E0D8]">
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <span class="px-2.5 py-1 bg-[#E5E0D8] text-black text-xs rounded font-medium">Milestone 2 (Active)</span>
+                            <span class="text-xs text-neutral-400">May — June</span>
                         </div>
-                        <div class="border-t border-brand-border pt-4">
-                            <p class="text-xs font-sans text-brand-navy font-bold mb-2">Past Track Record: 84% CO Rate</p>
-                            <button onclick="alert('Partner referral voucher generated! Show code OJ-APEX100 for S$50 off enrollment.')" class="w-full bg-brand-navy text-white text-xs py-2 rounded font-subheading hover:bg-brand-gold hover:text-brand-navy transition-all">Request Partner Referral</button>
-                        </div>
+                        <h3 class="font-serif-display text-2xl text-[#E5E0D8] mt-1">MOE DSA-Sec Application Submission Window</h3>
+                        <p class="text-sm text-neutral-400 mt-1">Submit school choices and talent selections via the official MOE portal.</p>
                     </div>
-
-                    <!-- Partner 2 -->
-                    <div class="card-editorial rounded-lg p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-start mb-3">
-                                <span class="text-[10px] font-sans font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Partner (Referral Fee Labeled)</span>
-                                <span class="text-xs font-bold text-brand-gold"><i class="fa-solid fa-star text-amber-500"></i> 4.8 (88 reviews)</span>
-                            </div>
-                            <h3 class="font-playfair text-xl font-bold text-brand-navy">Orator Debate & Leadership</h3>
-                            <p class="text-xs text-brand-gold font-sans font-semibold mb-2">Public Speaking & Student Council Prep</p>
-                            <p class="text-xs text-brand-muted font-serif mb-4">Trains students in persuasive communication, leadership portfolio structuring, and mock DSA panel interview responses.</p>
-                        </div>
-                        <div class="border-t border-brand-border pt-4">
-                            <p class="text-xs font-sans text-brand-navy font-bold mb-2">Past Track Record: 76% Shortlist Rate</p>
-                            <button onclick="alert('Partner referral voucher generated! Show code OJ-ORATOR50 for S$50 off trial.')" class="w-full bg-brand-navy text-white text-xs py-2 rounded font-subheading hover:bg-brand-gold hover:text-brand-navy transition-all">Request Partner Referral</button>
-                        </div>
+                    <div class="text-right">
+                        <button onclick="switchTab('pricing')" class="bg-[#E5E0D8] text-black hover:bg-neutral-200 px-4 py-2 rounded-lg text-xs font-medium transition-colors">Book Milestone Consult</button>
                     </div>
+                </div>
 
-                    <!-- Partner 3 -->
-                    <div class="card-editorial rounded-lg p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-start mb-3">
-                                <span class="text-[10px] font-sans font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Partner (Referral Fee Labeled)</span>
-                                <span class="text-xs font-bold text-brand-gold"><i class="fa-solid fa-star text-amber-500"></i> 4.9 (150 reviews)</span>
-                            </div>
-                            <h3 class="font-playfair text-xl font-bold text-brand-navy">Vanguard Robotics & AI Lab</h3>
-                            <p class="text-xs text-brand-gold font-sans font-semibold mb-2">FIRST LEGO League & Coding Mentorship</p>
-                            <p class="text-xs text-brand-muted font-serif mb-4">Helps students build tangible physical computing and AI projects suitable for SST and IP school STEM submissions.</p>
+                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-700 text-xs rounded text-neutral-400">Milestone 3</span>
+                            <span class="text-xs text-neutral-400">July — August</span>
                         </div>
-                        <div class="border-t border-brand-border pt-4">
-                            <p class="text-xs font-sans text-brand-navy font-bold mb-2">Past Track Record: 91% Portfolio Approval</p>
-                            <button onclick="alert('Partner referral voucher generated! Show code OJ-VANGUARD100 for S$100 off robotics kit.')" class="w-full bg-brand-navy text-white text-xs py-2 rounded font-subheading hover:bg-brand-gold hover:text-brand-navy transition-all">Request Partner Referral</button>
-                        </div>
+                        <h3 class="font-serif-display text-2xl text-[#E5E0D8] mt-1">School Trials, Auditions & Selection Interviews</h3>
+                        <p class="text-sm text-neutral-400 mt-1">Attend institutional trials, portfolio reviews, and face-to-face assessments.</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-neutral-400 bg-neutral-900 border border-neutral-800 px-3 py-1.5 rounded-lg inline-block">Upcoming</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== TAB 5: PRICING & MILESTONE PLANS ==================== -->
-        <section id="tab-pricing" class="tab-content hidden">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-10">
-                    <span class="badge-stage text-brand-navy text-xs uppercase px-3 py-1 rounded-full font-sans font-bold">Transparent Subscription Architecture</span>
-                    <h2 class="text-3xl md:text-4xl font-playfair font-bold text-brand-navy mt-2">Free to Track. Pay for a Plan and a Person.</h2>
-                    <p class="text-sm text-brand-muted font-serif max-w-2xl mx-auto mt-2">
-                        Software handles continuous tracking. Human consultations are strategically timed at critical DSA milestones to ensure 9.1:1 LTV/CAC efficiency without overcharging parents.
-                    </p>
+        <!-- SECTION: PRICING & TIERS -->
+        <section id="tab-pricing" class="tab-content max-w-5xl mx-auto space-y-8 hidden">
+            <div class="border-b border-neutral-800 pb-6">
+                <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">Simple Plans & Expert Consults</h2>
+                <p class="text-neutral-400 text-sm mt-1">Free to track. Upgrade for full AI analysis and milestone consultations with experienced educators[cite: 1].</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Free Tier -->
+                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col justify-between space-y-6">
+                    <div>
+                        <div class="text-xs uppercase tracking-wider text-neutral-400">Starter</div>
+                        <div class="font-serif-display text-4xl text-[#E5E0D8] mt-2">S$0 <span class="text-sm font-sans text-neutral-400">/ forever</span></div>
+                        <p class="text-xs text-neutral-400 mt-2">Essential tracking for self-directed families.</p>
+                        
+                        <ul class="mt-6 space-y-3 text-sm text-neutral-300">
+                            <li class="flex items-center gap-2">✓ Portfolio vault (limited uploads)</li>
+                            <li class="flex items-center gap-2">✓ DSA calendar & reminders</li>
+                            <li class="flex items-center gap-2">✓ Basic AI school-fit scan</li>
+                            <li class="flex items-center gap-2">✓ Tuition & enrichment directory</li>
+                        </ul>
+                    </div>
+                    <button class="w-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-[#E5E0D8] py-2.5 rounded-lg text-sm font-medium transition-colors">Current Plan</button>
                 </div>
 
-                <!-- Pricing Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                    <!-- FREE PLAN -->
-                    <div class="card-editorial p-8 rounded-xl border-t-4 border-t-gray-400 flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs font-sans font-bold text-gray-500 uppercase">Tier 1</span>
-                            <h3 class="font-playfair text-2xl font-bold text-brand-navy mt-1">Free Tier</h3>
-                            <div class="my-4">
-                                <span class="font-playfair text-4xl font-bold text-brand-navy">S$0</span>
-                                <span class="text-xs text-brand-muted font-serif">/ forever</span>
-                            </div>
-                            <ul class="space-y-3 text-xs text-brand-navy font-serif mb-6 border-t border-brand-border pt-4">
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i> <span>Portfolio Vault (Up to 10 entries)</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i> <span>Basic AI School-Fit Compatibility Index</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i> <span>MOE Key Admissions Date Reminders</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i> <span>Access to Vetted Partner Directory</span></li>
-                            </ul>
-                        </div>
-                        <button onclick="selectTier('Free')" class="w-full bg-brand-sand border border-brand-border text-brand-navy font-subheading py-3 rounded hover:bg-brand-navy hover:text-white transition-all text-xs font-bold">Current Active Tier</button>
+                <!-- Pro Tier -->
+                <div class="bg-neutral-900 border-2 border-[#E5E0D8] p-6 rounded-xl flex flex-col justify-between space-y-6 relative shadow-2xl">
+                    <div class="absolute -top-3 right-6 bg-[#E5E0D8] text-black text-xs px-3 py-0.5 rounded-full font-medium">Most Popular</div>
+                    <div>
+                        <div class="text-xs uppercase tracking-wider text-[#E5E0D8]">Pro Plan</div>
+                        <div class="font-serif-display text-4xl text-[#E5E0D8] mt-2">S$49.99 <span class="text-sm font-sans text-neutral-400">/ month</span></div>
+                        <p class="text-xs text-neutral-400 mt-2">Full software suite plus strategic milestone guidance.</p>
+                        
+                        <ul class="mt-6 space-y-3 text-sm text-neutral-300">
+                            <li class="flex items-center gap-2">✓ Unlimited portfolio uploads</li>
+                            <li class="flex items-center gap-2">✓ Full AI scan with reasons & next steps</li>
+                            <li class="flex items-center gap-2">✓ 3 junior consults timed to DSA milestones</li>
+                            <li class="flex items-center gap-2">✓ Structured plan from P5 to P6</li>
+                        </ul>
                     </div>
+                    <button onclick="alert('Redirecting to secure Stripe checkout for Pro Plan (S$49.99/mo)...')" class="w-full bg-[#E5E0D8] hover:bg-neutral-200 text-black py-2.5 rounded-lg text-sm font-medium transition-colors">Upgrade to Pro</button>
+                </div>
 
-                    <!-- PRO PLAN (RECOMMENDED) -->
-                    <div class="card-editorial p-8 rounded-xl border-2 border-brand-gold relative shadow-xl flex flex-col justify-between bg-white">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 gold-gradient text-brand-navy text-[10px] font-sans font-bold uppercase px-4 py-1 rounded-full shadow">Most Popular for P5 & P6</div>
-                        <div>
-                            <span class="text-xs font-sans font-bold text-brand-gold uppercase">Tier 2</span>
-                            <h3 class="font-playfair text-2xl font-bold text-brand-navy mt-1">Pro Plan</h3>
-                            <div class="my-4">
-                                <span class="font-playfair text-4xl font-bold text-brand-navy">S$49.99</span>
-                                <span class="text-xs text-brand-muted font-serif">/ month</span>
-                            </div>
-                            <p class="text-xs text-brand-muted font-serif mb-4 italic">~7% of average Singapore monthly tuition spend (S$677/mo)</p>
-                            <ul class="space-y-3 text-xs text-brand-navy font-serif mb-6 border-t border-brand-border pt-4">
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-gold"></i> <span class="font-bold">Unlimited Vault Uploads & Proof Storage</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-gold"></i> <span class="font-bold">Full AI Scan with Gaps & Actionable Steps</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-star text-brand-gold"></i> <span class="font-bold text-brand-navy">3 Milestone Consults (P5 Start, May App, Jul Trial)</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-gold"></i> <span>Custom P5-to-P6 DSA Roadmap Planner</span></li>
-                            </ul>
-                        </div>
-                        <button onclick="selectTier('Pro')" class="w-full gold-gradient text-brand-navy font-subheading py-3 rounded shadow hover:opacity-95 transition-all text-xs font-bold">Upgrade to Pro Plan</button>
+                <!-- Elite Tier -->
+                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col justify-between space-y-6">
+                    <div>
+                        <div class="text-xs uppercase tracking-wider text-neutral-400">Elite Plan</div>
+                        <div class="font-serif-display text-4xl text-[#E5E0D8] mt-2">S$99.99 <span class="text-sm font-sans text-neutral-400">/ month</span></div>
+                        <p class="text-xs text-neutral-400 mt-2">Comprehensive coverage through secondary and post-secondary transitions.</p>
+                        
+                        <ul class="mt-6 space-y-3 text-sm text-neutral-300">
+                            <li class="flex items-center gap-2">✓ Everything in Pro</li>
+                            <li class="flex items-center gap-2">✓ 6 senior consults a year</li>
+                            <li class="flex items-center gap-2">✓ Alerts for DSA-JC, Poly EAE, uni & scholarships</li>
+                            <li class="flex items-center gap-2">✓ Partner centre past-results filtering</li>
+                        </ul>
                     </div>
+                    <button onclick="alert('Redirecting to secure Stripe checkout for Elite Plan (S$99.99/mo)...')" class="w-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-[#E5E0D8] py-2.5 rounded-lg text-sm font-medium transition-colors">Upgrade to Elite</button>
+                </div>
+            </div>
+        </section>
 
-                    <!-- ELITE PLAN -->
-                    <div class="card-editorial p-8 rounded-xl border-t-4 border-t-brand-navy flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs font-sans font-bold text-brand-navy uppercase">Tier 3</span>
-                            <h3 class="font-playfair text-2xl font-bold text-brand-navy mt-1">Elite Plan</h3>
-                            <div class="my-4">
-                                <span class="font-playfair text-4xl font-bold text-brand-navy">S$99.99</span>
-                                <span class="text-xs text-brand-muted font-serif">/ month</span>
-                            </div>
-                            <ul class="space-y-3 text-xs text-brand-navy font-serif mb-6 border-t border-brand-border pt-4">
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i> <span>Everything in Pro Plan</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-star text-brand-gold"></i> <span class="font-bold">6 Senior Specialist Consults per Year</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i> <span>Alerts for DSA-JC, Poly EAE & Uni Scholarships</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i> <span>Centre Filter by Past Verified Track Records</span></li>
-                            </ul>
-                        </div>
-                        <button onclick="selectTier('Elite')" class="w-full bg-brand-navy text-white font-subheading py-3 rounded hover:bg-brand-gold hover:text-brand-navy transition-all text-xs font-bold">Upgrade to Elite Plan</button>
+        <!-- SECTION: PARTNER DIRECTORY -->
+        <section id="tab-partners" class="tab-content max-w-5xl mx-auto space-y-8 hidden">
+            <div class="border-b border-neutral-800 pb-6">
+                <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">Partner Enrichment Directory</h2>
+                <p class="text-neutral-400 text-sm mt-1">Pre-screened tuition and enrichment partners specializing in DSA domain preparation[cite: 1].</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs bg-neutral-900 border border-neutral-700 px-2.5 py-1 rounded text-neutral-300">STEM & Robotics</span>
+                        <span class="text-xs text-neutral-400">Verified Partner</span>
+                    </div>
+                    <h3 class="font-serif-display text-2xl text-[#E5E0D8]">Ancourage Academy</h3>
+                    <p class="text-sm text-neutral-400">Specialized applied programming, Arduino engineering, and competition training tailored for DSA-Sec STEM portfolios.</p>
+                    <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400">
+                        <span>One-North / Bukit Timah</span>
+                        <button onclick="alert('Contacting partner centre via OpenJio referral program...')" class="text-[#E5E0D8] underline hover:text-white">Request Partner Intro →</button>
                     </div>
                 </div>
 
-                <!-- One-Off Option Banner -->
-                <div class="card-editorial p-6 rounded-lg bg-brand-sand/40 border border-brand-gold/30 text-center max-w-2xl mx-auto">
-                    <h4 class="font-playfair text-lg font-bold text-brand-navy">Not Ready for a Monthly Plan?</h4>
-                    <p class="text-xs text-brand-muted font-serif mt-1 mb-3">Book a one-off 45-minute portfolio diagnostic consultation with a university consultant for a flat rate.</p>
-                    <button onclick="alert('Redirecting to single consultation scheduler (S$30/session)...')" class="bg-brand-navy text-brand-sand px-5 py-2 rounded text-xs font-subheading font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Book One-Off Consult (S$30)</button>
+                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs bg-neutral-900 border border-neutral-700 px-2.5 py-1 rounded text-neutral-300">Languages & Debating</span>
+                        <span class="text-xs text-neutral-400">Verified Partner</span>
+                    </div>
+                    <h3 class="font-serif-display text-2xl text-[#E5E0D8]">Orator & Minds Enrichment</h3>
+                    <p class="text-sm text-neutral-400">Competitive public speaking, Model United Nations, and structured essay writing for Humanities & Languages DSA tracks.</p>
+                    <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400">
+                        <span>Orchard / Bugis</span>
+                        <button onclick="alert('Contacting partner centre via OpenJio referral program...')" class="text-[#E5E0D8] underline hover:text-white">Request Partner Intro →</button>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Achievement Modal -->
-    <div id="addAchievementModal" class="fixed inset-0 bg-brand-navy/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl border border-brand-gold relative">
-            <button onclick="closeModal('addAchievementModal')" class="absolute top-4 right-4 text-brand-muted hover:text-brand-navy"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 class="font-playfair text-2xl font-bold text-brand-navy mb-1">Add Portfolio Achievement</h3>
-            <p class="text-xs text-brand-muted font-serif mb-4">Log non-MOE certificates, school appointments, or competition awards.</p>
-
-            <form id="achievementForm" onsubmit="handleAddAchievement(event)" class="space-y-4 text-xs font-sans">
+    <!-- MODAL: ADD RECORD -->
+    <div id="addModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-neutral-950 border border-neutral-800 rounded-2xl max-w-lg w-full p-6 space-y-6">
+            <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+                <h3 class="font-serif-display text-2xl text-[#E5E0D8]">Add Portfolio Achievement</h3>
+                <button onclick="closeAddModal()" class="text-neutral-400 hover:text-white">&times;</button>
+            </div>
+            <form id="addRecordForm" onsubmit="handleRecordSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="block font-bold text-brand-navy uppercase mb-1">Achievement Title</label>
-                    <input type="text" id="achTitle" required placeholder="e.g. National Mathematical Olympiad (NMOS) Silver" class="w-full border border-brand-border rounded p-2.5 font-serif focus:outline-none focus:border-brand-gold">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Achievement Title</label>
+                    <input type="text" id="recTitle" required placeholder="e.g. National Junior Robotics Championship - Gold" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
                 </div>
-
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block font-bold text-brand-navy uppercase mb-1">Domain Category</label>
-                        <select id="achCategory" class="w-full border border-brand-border rounded p-2.5 font-serif focus:outline-none focus:border-brand-gold">
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Category</label>
+                        <select id="recCategory" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
                             <option value="STEM">STEM & Innovation</option>
-                            <option value="Leadership">Leadership & Service</option>
-                            <option value="Sports">Sports Talent</option>
-                            <option value="Arts">Arts & Culture</option>
+                            <option value="Leadership">Leadership & Uniformed</option>
+                            <option value="Sports">Sports & Games</option>
+                            <option value="Arts">Arts & Aesthetics</option>
+                            <option value="Academic">Academic / Olympiad</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block font-bold text-brand-navy uppercase mb-1">Scope Level</label>
-                        <select id="achScope" class="w-full border border-brand-border rounded p-2.5 font-serif focus:outline-none focus:border-brand-gold">
-                            <option value="National Level">National Level</option>
-                            <option value="School Level">School Level</option>
-                            <option value="International">International</option>
-                            <option value="Outside Win">Outside Win (Non-MOE)</option>
-                        </select>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Year / Milestone</label>
+                        <input type="text" id="recYear" required placeholder="2026 (P5)" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
                     </div>
                 </div>
-
                 <div>
-                    <label class="block font-bold text-brand-navy uppercase mb-1">Date Awarded</label>
-                    <input type="date" id="achDate" required class="w-full border border-brand-border rounded p-2.5 font-serif focus:outline-none focus:border-brand-gold">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Evidence Description & Verification</label>
+                    <textarea id="recDesc" rows="3" required placeholder="Describe organization, certificate reference, and role..." class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]"></textarea>
                 </div>
-
-                <div>
-                    <label class="block font-bold text-brand-navy uppercase mb-1">Key Takeaway / Reflection</label>
-                    <textarea id="achTakeaway" rows="3" placeholder="Explain leadership role or technical obstacle overcome..." class="w-full border border-brand-border rounded p-2.5 font-serif focus:outline-none focus:border-brand-gold"></textarea>
-                </div>
-
-                <div class="pt-2 flex justify-end space-x-3">
-                    <button type="button" onclick="closeModal('addAchievementModal')" class="px-4 py-2 border border-brand-border rounded text-brand-navy hover:bg-brand-sand">Cancel</button>
-                    <button type="submit" class="px-5 py-2 bg-brand-navy text-white rounded font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Save to Vault</button>
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" onclick="closeAddModal()" class="px-4 py-2 bg-neutral-900 border border-neutral-700 text-neutral-300 rounded-lg text-sm">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-[#E5E0D8] text-black font-medium rounded-lg text-sm hover:bg-neutral-200">Save Record</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-brand-navy text-brand-sand border-t border-brand-gold/30 py-10 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-xs font-serif">
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-2 mb-3">
-                        <div class="w-7 h-7 rounded-full bg-brand-gold text-brand-navy flex items-center justify-center font-playfair font-bold text-sm">O</div>
-                        <span class="font-playfair text-xl font-bold text-white tracking-wide">OpenJio</span>
-                    </div>
-                    <p class="text-brand-muted max-w-sm">
-                        Helps Singapore families track records from Primary 4 to University. Built on transparent milestone consulting and zero trial-and-error.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="font-playfair text-sm font-bold text-brand-gold mb-3">Admissions Pipelines</h4>
-                    <ul class="space-y-2 text-brand-sand/80">
-                        <li><a href="#" onclick="changePipelineStage('p4-p6')" class="hover:text-brand-gold">DSA-Secondary (P4-P6)</a></li>
-                        <li><a href="#" onclick="changePipelineStage('sec3-sec5')" class="hover:text-brand-gold">DSA-JC & Poly EAE</a></li>
-                        <li><a href="#" onclick="changePipelineStage('jc-poly-ns')" class="hover:text-brand-gold">Uni Aptitude & Scholarships</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-playfair text-sm font-bold text-brand-gold mb-3">Compliance & PDPA</h4>
-                    <p class="text-brand-muted text-[11px] leading-relaxed">
-                        Under PDPC guidelines (2024), children's data under 13 is treated as sensitive. Parents retain full ownership and control of all uploaded evidence records.
-                    </p>
-                </div>
-            </div>
-
-            <div class="border-t border-brand-slate/60 pt-6 flex flex-col md:flex-row justify-between items-center text-[11px] text-brand-muted">
-                <p>&copy; 2026 OpenJio Platform. Singapore. All rights reserved.</p>
-                <div class="flex space-x-4 mt-2 md:mt-0">
-                    <a href="#" class="hover:text-brand-gold">Privacy Policy</a>
-                    <a href="#" class="hover:text-brand-gold">PDPA Statement</a>
-                    <a href="#" class="hover:text-brand-gold">MOE Guidelines Alignment</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JAVASCRIPT APP LOGIC -->
+    <!-- JAVASCRIPT CONTROLLER -->
     <script>
-        // Data State
-        let currentStage = 'p4-p6';
-        let userTier = 'Free';
-
-        let vaultData = [
-            {
-                id: 1,
-                title: 'Head Prefect Appointment',
-                category: 'Leadership',
-                scope: 'School Level',
-                date: '2025-01-15',
-                takeaway: 'Led a team of 30 prefects in organizing National Day celebrations and daily morning routines.',
-                verified: true
-            },
-            {
-                id: 2,
-                title: 'National Mathematical Olympiad (NMOS) Silver',
-                category: 'STEM',
-                scope: 'National Level',
-                date: '2025-07-20',
-                takeaway: 'Ranked in top 10% nationwide. Demonstrated high spatial reasoning and advanced algebra techniques.',
-                verified: true
-            },
-            {
-                id: 3,
-                title: 'National School Games Badminton Quarter-Finalist',
-                category: 'Sports',
-                scope: 'National Level',
-                date: '2025-04-12',
-                takeaway: 'Represented school singles team. Built endurance under pressure during match deciders.',
-                verified: false
-            },
-            {
-                id: 4,
-                title: 'Singapore Youth Festival (SYF) Distinction',
-                category: 'Arts',
-                scope: 'National Level',
-                date: '2025-08-05',
-                takeaway: 'First Violin section leader for Chinese Orchestra performance.',
-                verified: true
-            },
-            {
-                id: 5,
-                title: 'Community Green Champion Outside Project',
-                category: 'Leadership',
-                scope: 'Outside Win',
-                date: '2025-11-02',
-                takeaway: 'Organized neighborhood recycling drive collecting over 150kg of paper and electronics.',
-                verified: true
-            }
+        // Sample Portfolio Records Data
+        let records = [
+            { id: 1, title: 'National Junior Robotics Olympiad — Gold', category: 'STEM', year: '2026 (P5)', desc: 'Team captain for autonomous navigation challenge.', verified: 'Verified PDF' },
+            { id: 2, title: 'School Prefect Executive ExCo', category: 'Leadership', year: '2025-2026', desc: 'Led student welfare committee of 40 members.', verified: 'School Letter' },
+            { id: 3, title: 'Singapore Mathematical Olympiad — Junior (Bronze)', category: 'Academic', year: '2025 (P5)', desc: 'Individual top 15% national ranking.', verified: 'Official Cert' },
+            { id: 4, title: 'National Youth Council Community Badge', category: 'Leadership', year: '2025', desc: 'Completed 30 hours of ground-up volunteering.', verified: 'Cert #NYC-8821' },
+            { id: 5, title: 'National Primary Schools Wushu Championship', category: 'Sports', year: '2024 (P4)', desc: 'Competed in Changquan division.', verified: 'Official Badge' },
+            { id: 6, title: 'School Infocomm Club President', category: 'STEM', year: '2026', desc: 'Conducted Python programming workshops for juniors.', verified: 'CCA Record' }
         ];
 
-        // Initialize App
-        window.onload = function() {
-            renderVault();
-        };
-
-        // Navigation Tabs Switching Logic
+        // Tab Switching Logic
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('block'));
-            
             document.getElementById('tab-' + tabId).classList.remove('hidden');
-            document.getElementById('tab-' + tabId).classList.add('block');
 
-            // Reset navigation highlights
-            const tabs = ['vault', 'scan', 'calendar', 'directory', 'pricing'];
-            tabs.forEach(t => {
-                const navBtn = document.getElementById('nav-' + t);
-                const mobileNavBtn = document.getElementById('mobile-nav-' + t);
-                if (navBtn) {
-                    navBtn.className = 'text-brand-navy hover:text-brand-gold transition-colors pb-1';
-                }
-                if (mobileNavBtn) {
-                    mobileNavBtn.className = 'whitespace-nowrap text-brand-navy';
-                }
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-[#E5E0D8]', 'text-black');
+                btn.classList.add('text-neutral-400', 'hover:text-[#E5E0D8]', 'hover:bg-neutral-900');
             });
-
-            // Set Active
-            const activeNav = document.getElementById('nav-' + tabId);
-            const activeMobileNav = document.getElementById('mobile-nav-' + tabId);
-            if (activeNav) {
-                activeNav.className = 'text-brand-gold border-b-2 border-brand-gold pb-1 font-bold';
-            }
-            if (activeMobileNav) {
-                activeMobileNav.className = 'whitespace-nowrap font-bold text-brand-gold';
-            }
+            event.currentTarget.classList.remove('text-neutral-400', 'hover:text-[#E5E0D8]', 'hover:bg-neutral-900');
+            event.currentTarget.classList.add('bg-[#E5E0D8]', 'text-black');
         }
 
-        // Pipeline Stage Changer
-        function changePipelineStage(stage) {
-            currentStage = stage;
-            const titleEl = document.getElementById('stageTitle');
-            const subEl = document.getElementById('stageSubtitle');
-
-            if (stage === 'p4-p6') {
-                titleEl.textContent = 'P4 to P6: Direct School Admission (DSA-Sec)';
-                subEl.textContent = 'Tracking Singapore primary school talent domain portfolios (Sports, Leadership, STEM, Arts) before MOE Portal opening in May.';
-            } else if (stage === 'sec3-sec5') {
-                titleEl.textContent = 'Sec 3 to 4/5: DSA-JC & Poly Early Admissions Exercise (EAE)';
-                subEl.textContent = 'Consolidating Sec school leadership, CCA contributions, and Poly course-specific passion projects for early poly/JC seats.';
-            } else if (stage === 'jc-poly-ns') {
-                titleEl.textContent = 'JC / Poly / NS: University Aptitude-Based Admissions & Scholarships';
-                subEl.textContent = 'Tracking holistic university admission portfolios for NUS, NTU, SMU, SUTD and global scholarship portals.';
-            }
-        }
-
-        // Render Portfolio Vault
-        function renderVault(filterCat = 'all') {
-            const grid = document.getElementById('vaultGrid');
-            grid.innerHTML = '';
-
-            const filteredData = filterCat === 'all' 
-                ? vaultData 
-                : vaultData.filter(item => item.category === filterCat);
-
-            document.getElementById('vaultCount').textContent = `${vaultData.length} / ${userTier === 'Free' ? '10' : 'Unlimited'}`;
-
-            filteredData.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'card-editorial p-6 rounded-lg flex flex-col justify-between border-l-4 ' + getCategoryColorBorder(item.category);
-                
-                card.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-sans font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-sand text-brand-navy">${item.scope}</span>
-                            <span class="text-xs text-brand-muted font-sans">${item.date}</span>
-                        </div>
-                        <h3 class="font-playfair text-lg font-bold text-brand-navy mb-1">${item.title}</h3>
-                        <p class="text-xs text-brand-gold font-sans font-semibold mb-3">${item.category} Domain</p>
-                        <p class="text-xs text-brand-muted font-serif leading-relaxed mb-4">"${item.takeaway}"</p>
-                    </div>
-                    <div class="border-t border-brand-border pt-3 flex justify-between items-center text-xs">
-                        <span class="${item.verified ? 'text-emerald-700' : 'text-amber-700'} font-sans font-semibold flex items-center space-x-1">
-                            <i class="fa-solid ${item.verified ? 'fa-shield-check' : 'fa-circle-exclamation'}"></i>
-                            <span>${item.verified ? 'Proof Verified' : 'Proof Pending Upload'}</span>
-                        </span>
-                        <button onclick="deleteItem(${item.id})" class="text-brand-muted hover:text-red-700 transition-colors"><i class="fa-regular fa-trash-can"></i></button>
-                    </div>
+        // Render Portfolio Table
+        function renderPortfolio() {
+            const tbody = document.getElementById('portfolioTableBody');
+            tbody.innerHTML = '';
+            records.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-4">
+                        <div class="font-medium text-[#E5E0D8]">${r.title}</div>
+                        <div class="text-xs text-neutral-400 mt-0.5">${r.desc}</div>
+                    </td>
+                    <td class="p-4"><span class="px-2 py-1 bg-neutral-900 border border-neutral-700 rounded text-xs text-neutral-300">${r.category}</span></td>
+                    <td class="p-4 text-neutral-400">${r.year}</td>
+                    <td class="p-4"><span class="text-xs text-emerald-400 font-medium">${r.verified}</span></td>
+                    <td class="p-4 text-right">
+                        <button onclick="deleteRecord(${r.id})" class="text-neutral-500 hover:text-red-400 text-xs">Remove</button>
+                    </td>
                 `;
-                grid.appendChild(card);
+                tbody.appendChild(tr);
             });
+            document.getElementById('statTotal').innerText = records.length + ' Items';
+            document.getElementById('recordCount').innerText = 'Showing ' + records.length + ' records';
         }
 
-        function getCategoryColorBorder(cat) {
-            switch(cat) {
-                case 'Leadership': return 'border-l-brand-navy';
-                case 'STEM': return 'border-l-brand-gold';
-                case 'Sports': return 'border-l-emerald-600';
-                case 'Arts': return 'border-l-purple-600';
-                default: return 'border-l-brand-border';
-            }
-        }
+        // Modal Controls
+        function openAddModal() { document.getElementById('addModal').classList.remove('hidden'); document.getElementById('addModal').classList.add('flex'); }
+        function closeAddModal() { document.getElementById('addModal').classList.add('hidden'); document.getElementById('addModal').classList.remove('flex'); }
 
-        function filterVault(category) {
-            document.querySelectorAll('.vault-filter-btn').forEach(btn => {
-                if (btn.getAttribute('data-cat') === category) {
-                    btn.className = 'vault-filter-btn px-3 py-1 text-xs rounded-full bg-brand-navy text-white font-sans font-medium';
-                } else {
-                    btn.className = 'vault-filter-btn px-3 py-1 text-xs rounded-full bg-brand-sand text-brand-navy font-sans font-medium hover:bg-brand-gold/20';
-                }
-            });
-            renderVault(category);
-        }
-
-        // Add Achievement Handler
-        function handleAddAchievement(e) {
+        // Handle Add Record Form
+        function handleRecordSubmit(e) {
             e.preventDefault();
-            
-            if (userTier === 'Free' && vaultData.length >= 10) {
-                alert('Free tier upload limit reached (10 items). Please upgrade to Pro for unlimited uploads!');
-                closeModal('addAchievementModal');
-                switchTab('pricing');
-                return;
-            }
-
-            const title = document.getElementById('achTitle').value;
-            const category = document.getElementById('achCategory').value;
-            const scope = document.getElementById('achScope').value;
-            const date = document.getElementById('achDate').value;
-            const takeaway = document.getElementById('achTakeaway').value;
-
-            const newItem = {
+            const newRec = {
                 id: Date.now(),
-                title,
-                category,
-                scope,
-                date,
-                takeaway: takeaway || 'Key milestone logged into portfolio vault.',
-                verified: true
+                title: document.getElementById('recTitle').value,
+                category: document.getElementById('recCategory').value,
+                year: document.getElementById('recYear').value,
+                desc: document.getElementById('recDesc').value,
+                verified: 'Pending Upload'
             };
-
-            vaultData.unshift(newItem);
-            renderVault();
-            closeModal('addAchievementModal');
-            document.getElementById('achievementForm').reset();
+            records.unshift(newRec);
+            renderPortfolio();
+            closeAddModal();
+            document.getElementById('addRecordForm').reset();
         }
 
-        function deleteItem(id) {
-            vaultData = vaultData.filter(i => i.id !== id);
-            renderVault();
+        // Delete Record
+        function deleteRecord(id) {
+            records = records.filter(r => r.id !== id);
+            renderPortfolio();
         }
 
-        // AI Diagnostic Scanner Simulation
-        function runAIScan() {
+        // AI Scan simulation
+        function runAiScan() {
             const school = document.getElementById('targetSchoolSelect').value;
-            const domain = document.getElementById('targetDomainSelect').value;
-            const resultsContainer = document.getElementById('aiScanResults');
+            const scoreBadge = document.getElementById('resultScoreBadge');
+            const schoolName = document.getElementById('resultSchoolName');
+            const strengths = document.getElementById('resultStrengths');
+            const gaps = document.getElementById('resultGaps');
 
-            // Show loading simulation
-            resultsContainer.innerHTML = `
-                <div class="card-editorial p-8 rounded-xl text-center">
-                    <i class="fa-solid fa-spinner fa-spin text-3xl text-brand-gold mb-3"></i>
-                    <h3 class="font-playfair text-lg font-bold text-brand-navy">Analyzing Portfolio Records against ${school} Benchmarks...</h3>
-                    <p class="text-xs text-brand-muted font-serif">Cross-referencing domain certificates, leadership depth, and MOE selection criteria.</p>
-                </div>
-            `;
-
-            setTimeout(() => {
-                let score = 82;
-                let matches = [];
-                let gaps = [];
-                let nextSteps = [];
-
-                if (school === 'RI' || school === 'HCI') {
-                    score = domain === 'STEM' ? 86 : 74;
-                    matches = [
-                        'National Mathematical Olympiad (NMOS) Silver medal matches tier-1 academic requirements.',
-                        'Head Prefect school appointment meets baseline leadership exposure expectations.'
-                    ];
-                    gaps = [
-                        'Missing 1 national-level science innovation project or competition write-up.',
-                        'Personal Statement needs stronger reflection on resilience during non-academic challenges.'
-                    ];
-                    nextSteps = [
-                        'Enroll in an advanced Science Olympiad workshop or independent research project.',
-                        'Schedule a Pro milestone consult prior to May application submission to review personal statement draft.'
-                    ];
-                } else if (school === 'SST') {
-                    score = domain === 'STEM' ? 92 : 68;
-                    matches = [
-                        'Strong affinity shown through Math Olympiad and hands-on community projects.'
-                    ];
-                    gaps = [
-                        'Needs tangible physical coding or STEM design portfolio evidence.'
-                    ];
-                    nextSteps = [
-                        'Consolidate a 3-page project breakdown of a coding or robotics endeavor into Vault.'
-                    ];
-                } else {
-                    score = 78;
-                    matches = ['Balanced portfolio with strong multi-disciplinary engagement.'];
-                    gaps = ['Requires domain-specific audition or specialized portfolio artifact.'];
-                    nextSteps = ['Schedule mock interview practice before July selection trials.'];
-                }
-
-                document.getElementById('fitIndexScore').textContent = `${score}%`;
-
-                resultsContainer.innerHTML = `
-                    <div class="card-editorial p-6 rounded-xl border-t-4 border-t-brand-gold">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-brand-border pb-4 mb-6">
-                            <div>
-                                <span class="text-xs font-sans font-bold text-brand-gold uppercase">Diagnostic Scan Output</span>
-                                <h3 class="font-playfair text-2xl font-bold text-brand-navy">${school} — ${domain} Target</h3>
-                            </div>
-                            <div class="mt-2 md:mt-0 text-right">
-                                <span class="text-xs text-brand-muted font-sans font-semibold uppercase block">Estimated Fit Score</span>
-                                <span class="font-playfair text-3xl font-bold text-brand-navy">${score}%</span>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div class="bg-emerald-50/60 p-4 rounded-lg border border-emerald-200">
-                                <h4 class="font-playfair font-bold text-emerald-900 text-sm mb-2"><i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> Matching Strengths</h4>
-                                <ul class="text-xs font-serif text-emerald-950 space-y-2">
-                                    ${matches.map(m => `<li>• ${m}</li>`).join('')}
-                                </ul>
-                            </div>
-
-                            <div class="bg-amber-50/60 p-4 rounded-lg border border-amber-200">
-                                <h4 class="font-playfair font-bold text-amber-900 text-sm mb-2"><i class="fa-solid fa-triangle-exclamation text-amber-600 mr-2"></i> Identified Portfolio Gaps</h4>
-                                <ul class="text-xs font-serif text-amber-950 space-y-2">
-                                    ${gaps.map(g => `<li>• ${g}</li>`).join('')}
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="bg-brand-sand/40 p-4 rounded-lg border border-brand-border">
-                            <h4 class="font-playfair font-bold text-brand-navy text-sm mb-2"><i class="fa-solid fa-compass text-brand-gold mr-2"></i> Concrete Strategic Next Steps</h4>
-                            <ul class="text-xs font-serif text-brand-navy space-y-1 mb-3">
-                                ${nextSteps.map(n => `<li>1. ${n}</li>`).join('')}
-                            </ul>
-                            <div class="text-right">
-                                <button onclick="switchTab('pricing')" class="text-xs font-subheading font-bold text-brand-gold hover:underline">Book Milestone Consult for Detailed Guidance &rarr;</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }, 1000);
+            if (school === 'hci') {
+                schoolName.innerText = 'Raffles Institution / HCI';
+                scoreBadge.innerText = '89% Match';
+                strengths.innerHTML = `<li class="flex items-start gap-2">✓ Outstanding STEM competition record (Gold in Robotics Olympiad).</li><li class="flex items-start gap-2">✓ Leadership experience as Infocomm President.</li>`;
+                gaps.innerHTML = `<li class="flex items-start gap-2">⚠ Need additional documentation of peer mentorship.</li><li class="flex items-start gap-2">➔ Recommendation: Lock portfolio prior to May MOE submission window.</li>`;
+            } else if (school === 'acs') {
+                schoolName.innerText = 'ACS (Independent) — STEM';
+                scoreBadge.innerText = '82% Match';
+                strengths.innerHTML = `<li class="flex items-start gap-2">✓ Strong Olympiad performance in mathematics.</li><li class="flex items-start gap-2">✓ Solid holistic CCA involvement.</li>`;
+                gaps.innerHTML = `<li class="flex items-start gap-2">⚠ Consider adding community service project evidence.</li>`;
+            } else {
+                schoolName.innerText = 'School / Domain Target';
+                scoreBadge.innerText = '78% Match';
+                strengths.innerHTML = `<li class="flex items-start gap-2">✓ Balanced portfolio across multiple domains.</li>`;
+                gaps.innerHTML = `<li class="flex items-start gap-2">➔ Focus on depth in your primary talent area.</li>`;
+            }
         }
 
-        // Tier Selection Simulator
-        function selectTier(tierName) {
-            userTier = tierName;
-            document.getElementById('userTierBadge').textContent = `${tierName} Plan`;
-            renderVault();
-            alert(`You have selected the ${tierName} Tier. Diagnostic indicators updated!`);
-        }
-
-        // Modal Helpers
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-        }
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
+        // Initial load
+        renderPortfolio();
     </script>
 </body>
 </html>
