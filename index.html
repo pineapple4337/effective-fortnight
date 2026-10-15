@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-black text-[#E5E0D8]">
+<html lang="en" class="h-full bg-[#F7F5F0] text-neutral-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,50 +7,53 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .font-serif-display {
-            font-family: 'Instrument Serif', Georgia, serif;
-            letter-spacing: -0.015em;
+            font-family: 'Playfair Display', Georgia, serif;
         }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
 </head>
-<body class="h-full flex flex-col md:flex-row antialiased bg-black text-[#E5E0D8] selection:bg-[#E5E0D8] selection:text-black">
+<body class="h-full flex flex-col md:flex-row antialiased bg-[#F7F5F0] text-neutral-900 selection:bg-neutral-900 selection:text-[#F7F5F0]">
 
     <!-- SIDEBAR NAVIGATION -->
-    <aside class="w-full md:w-72 bg-neutral-950 border-r border-neutral-800 flex flex-col justify-between p-6 shrink-0">
+    <aside class="w-full md:w-72 bg-[#EDE8DE] border-r border-[#D9D3C7] flex flex-col justify-between p-6 shrink-0">
         <div>
             <!-- Brand -->
             <div class="flex items-center gap-3 mb-10">
-                <div class="w-8 h-8 rounded bg-[#E5E0D8] text-black flex items-center justify-center font-serif-display text-xl font-bold">O</div>
+                <div class="w-8 h-8 rounded bg-neutral-900 text-[#F7F5F0] flex items-center justify-center font-serif-display text-lg font-bold">O</div>
                 <div>
-                    <h1 class="font-serif-display text-2xl font-normal tracking-wide text-[#E5E0D8]">OpenJio</h1>
-                    <p class="text-xs text-neutral-400">Admissions & Portfolio Planner</p>
+                    <h1 class="font-serif-display text-xl font-semibold tracking-wide text-neutral-900">OpenJio</h1>
+                    <p class="text-xs text-neutral-600">Admissions & Portfolio Planner</p>
                 </div>
             </div>
 
             <!-- Navigation Links -->
             <nav class="space-y-1.5" id="nav-tabs">
-                <button onclick="switchTab('vault')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors bg-[#E5E0D8] text-black">
+                <button onclick="switchTab('vault')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors bg-neutral-900 text-[#F7F5F0]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
                     Portfolio Vault
                 </button>
-                <button onclick="switchTab('scanner')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-400 hover:text-[#E5E0D8] hover:bg-neutral-900">
+                <button onclick="switchTab('triage')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-600 hover:text-neutral-900 hover:bg-[#E2DCCE]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    Triage & Signup
+                </button>
+                <button onclick="switchTab('scanner')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-600 hover:text-neutral-900 hover:bg-[#E2DCCE]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012-2m-6 9l2 2 4-4"/></svg>
                     AI School-Fit Scan
                 </button>
-                <button onclick="switchTab('timeline')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-400 hover:text-[#E5E0D8] hover:bg-neutral-900">
+                <button onclick="switchTab('timeline')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-600 hover:text-neutral-900 hover:bg-[#E2DCCE]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                     Admissions Timeline
                 </button>
-                <button onclick="switchTab('pricing')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-400 hover:text-[#E5E0D8] hover:bg-neutral-900">
+                <button onclick="switchTab('pricing')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-600 hover:text-neutral-900 hover:bg-[#E2DCCE]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
                     Plans & Consults
                 </button>
-                <button onclick="switchTab('partners')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-400 hover:text-[#E5E0D8] hover:bg-neutral-900">
+                <button onclick="switchTab('partners')" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors text-neutral-600 hover:text-neutral-900 hover:bg-[#E2DCCE]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                     Partner Directory
                 </button>
@@ -58,9 +61,9 @@
         </div>
 
         <!-- Admissions Stage Selector -->
-        <div class="pt-6 border-t border-neutral-800">
-            <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Admissions Stage</label>
-            <select id="stageSelect" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
+        <div class="pt-6 border-t border-[#D9D3C7]">
+            <label class="block text-xs uppercase tracking-wider text-neutral-600 mb-2 font-medium">Admissions Stage</label>
+            <select id="stageSelect" class="w-full bg-[#FFFFFF] border border-[#D9D3C7] text-sm rounded-lg p-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900">
                 <option value="p4-p6">P4 to P6 (DSA-Sec Window)</option>
                 <option value="sec3-4">Sec 3 to 4 (DSA-JC / Poly EAE)</option>
                 <option value="jc-uni">JC / Poly / NS (Uni Admissions)</option>
@@ -71,114 +74,188 @@
     <!-- MAIN CONTENT AREA -->
     <main class="flex-1 overflow-y-auto p-6 md:p-12">
         
-        <!-- SECTION: PORTFOLIO VAULT -->
-        <section id="tab-vault" class="tab-content max-w-5xl mx-auto space-y-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-800 pb-6">
-                <div>
-                    <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">Portfolio Vault</h2>
-                    <p class="text-neutral-400 text-sm mt-1">One secure record holding outside wins, certificates, and CCA milestones from P4 to university[cite: 1].</p>
-                </div>
-                <button onclick="openAddModal()" class="bg-[#E5E0D8] text-black hover:bg-neutral-200 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 self-start">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                    Add Achievement
-                </button>
-            </div>
-
-            <!-- Vault Summary Stats -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
-                    <div class="text-neutral-400 text-xs uppercase tracking-wider mb-1">Total Verified Records</div>
-                    <div id="statTotal" class="font-serif-display text-3xl text-[#E5E0D8]">6 Items</div>
-                    <div class="text-xs text-neutral-400 mt-2">Max 10 recommended for DSA portal entry</div>
-                </div>
-                <div class="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
-                    <div class="text-neutral-400 text-xs uppercase tracking-wider mb-1">Primary Domain</div>
-                    <div class="font-serif-display text-3xl text-[#E5E0D8]">STEM & Innovation</div>
-                    <div class="text-xs text-neutral-400 mt-2">Robotics & Applied Programming</div>
-                </div>
-                <div class="bg-neutral-950 border border-neutral-800 p-5 rounded-xl">
-                    <div class="text-neutral-400 text-xs uppercase tracking-wider mb-1">Vault Status</div>
-                    <div class="font-serif-display text-3xl text-[#E5E0D8]">PDPA Secure</div>
-                    <div class="text-xs text-neutral-400 mt-2">Parent-controlled data repository</div>
+        <!-- SECTION: PORTFOLIO VAULT (LinkedIn Style Feed) -->
+        <section id="tab-vault" class="tab-content max-w-4xl mx-auto space-y-6">
+            <!-- LinkedIn-style Profile Header Card -->
+            <div class="bg-white border border-[#D9D3C7] rounded-xl overflow-hidden shadow-sm">
+                <div class="h-28 bg-neutral-900 relative"></div>
+                <div class="px-6 pb-6 relative">
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between -mt-12 mb-4 gap-4">
+                        <div class="flex items-end gap-4">
+                            <div class="w-24 h-24 rounded-full bg-[#EDE8DE] border-4 border-white flex items-center justify-center font-serif-display text-3xl font-bold text-neutral-900 shadow-md">
+                                YL
+                            </div>
+                            <div class="mb-1">
+                                <h2 class="font-serif-display text-2xl font-bold text-neutral-900">Yong Le Jun (Child Profile)</h2>
+                                <p class="text-sm text-neutral-600">Primary 5 • Target: Direct School Admission (DSA-Sec) • STEM & Robotics Track</p>
+                            </div>
+                        </div>
+                        <button onclick="openAddModal()" class="bg-neutral-900 text-[#F7F5F0] hover:bg-neutral-800 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 shadow-sm self-start sm:self-auto">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                            Add Achievement
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-6 text-xs text-neutral-600 border-t border-neutral-100 pt-4">
+                        <div><strong class="text-neutral-900" id="statTotal">6</strong> Verified Records</div>
+                        <div><strong class="text-neutral-900">100%</strong> Parent-Owned Vault</div>
+                        <div class="text-emerald-700 font-medium">● PDPA Compliant & Secure</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Records Table -->
-            <div class="bg-neutral-950 border border-neutral-800 rounded-xl overflow-hidden">
-                <div class="p-4 border-b border-neutral-800 flex items-center justify-between">
-                    <span class="text-sm font-medium text-[#E5E0D8]">Logged Achievements & Evidence</span>
-                    <span class="text-xs text-neutral-400" id="recordCount">Showing 6 records</span>
+            <!-- Feed Section Title -->
+            <div class="flex items-center justify-between pt-2">
+                <h3 class="font-serif-display text-xl font-bold text-neutral-900">Portfolio Activity & Experience Feed</h3>
+                <span class="text-xs text-neutral-600" id="recordCount">Showing 6 achievements</span>
+            </div>
+
+            <!-- LinkedIn Feed Cards Container -->
+            <div id="portfolioFeed" class="space-y-4">
+                <!-- Dynamically populated LinkedIn-style cards -->
+            </div>
+        </section>
+
+        <!-- SECTION: TRIAGE & SIGNUP (NEW) -->
+        <section id="tab-triage" class="tab-content max-w-3xl mx-auto space-y-8 hidden">
+            <div class="border-b border-[#D9D3C7] pb-6">
+                <h2 class="font-serif-display text-4xl font-bold tracking-tight text-neutral-900">Family Triage & Onboarding</h2>
+                <p class="text-neutral-600 text-sm mt-1">Answer 3 quick questions to determine your readiness for DSA and see your personalized roadmap.</p>
+            </div>
+
+            <div class="bg-white border border-[#D9D3C7] rounded-xl p-8 shadow-sm space-y-6" id="triageWizard">
+                <div class="space-y-4">
+                    <span class="text-xs font-semibold tracking-wider uppercase text-neutral-500">Step 1 of 3</span>
+                    <h3 class="font-serif-display text-2xl text-neutral-900">What stage is your child currently in?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <label class="border border-[#D9D3C7] rounded-lg p-4 flex items-center gap-3 cursor-pointer hover:bg-[#F7F5F0] transition-colors">
+                            <input type="radio" name="triageStage" value="P4" checked class="text-neutral-900 focus:ring-neutral-900">
+                            <div>
+                                <div class="font-medium text-sm">Primary 4</div>
+                                <div class="text-xs text-neutral-600">Early portfolio building</div>
+                            </div>
+                        </label>
+                        <label class="border border-[#D9D3C7] rounded-lg p-4 flex items-center gap-3 cursor-pointer hover:bg-[#F7F5F0] transition-colors">
+                            <input type="radio" name="triageStage" value="P5" class="text-neutral-900 focus:ring-neutral-900">
+                            <div>
+                                <div class="font-medium text-sm">Primary 5</div>
+                                <div class="text-xs text-neutral-600">Critical window for DSA prep</div>
+                            </div>
+                        </label>
+                        <label class="border border-[#D9D3C7] rounded-lg p-4 flex items-center gap-3 cursor-pointer hover:bg-[#F7F5F0] transition-colors">
+                            <input type="radio" name="triageStage" value="P6" class="text-neutral-900 focus:ring-neutral-900">
+                            <div>
+                                <div class="font-medium text-sm">Primary 6</div>
+                                <div class="text-xs text-neutral-600">Application & trial season</div>
+                            </div>
+                        </label>
+                        <label class="border border-[#D9D3C7] rounded-lg p-4 flex items-center gap-3 cursor-pointer hover:bg-[#F7F5F0] transition-colors">
+                            <input type="radio" name="triageStage" value="Sec/JC" class="text-neutral-900 focus:ring-neutral-900">
+                            <div>
+                                <div class="font-medium text-sm">Secondary / JC / Poly</div>
+                                <div class="text-xs text-neutral-600">DSA-JC, EAE & Uni admission</div>
+                            </div>
+                        </label>
+                    </div>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-neutral-900 text-neutral-400 text-xs uppercase tracking-wider border-b border-neutral-800">
-                            <tr>
-                                <th class="p-4">Title & Description</th>
-                                <th class="p-4">Category</th>
-                                <th class="p-4">Date / Year</th>
-                                <th class="p-4">Verification</th>
-                                <th class="p-4 text-right">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="portfolioTableBody" class="divide-y divide-neutral-800 text-neutral-300">
-                            <!-- Dynamically populated -->
-                        </tbody>
-                    </table>
+
+                <div class="space-y-4 pt-4 border-t border-neutral-100">
+                    <span class="text-xs font-semibold tracking-wider uppercase text-neutral-500">Step 2 of 3</span>
+                    <h3 class="font-serif-display text-2xl text-neutral-900">What is your main friction right now?</h3>
+                    <div class="space-y-2 pt-2">
+                        <label class="border border-[#D9D3C7] rounded-lg p-3.5 flex items-center gap-3 cursor-pointer hover:bg-[#F7F5F0]">
+                            <input type="radio" name="triageFriction" value="cost" checked class="text-neutral-900">
+                            <span class="text-sm">Unsure if tuition spend is actually helping with DSA outcomes.</span>
+                        </label>
+                        <label class="border border-[#D9D3C7] rounded-lg p-3.5 flex items-center gap-3 cursor-pointer hover:bg-[#F7F5F0]">
+                            <input type="radio" name="triageFriction" value="records" class="text-neutral-900">
+                            <span class="text-sm">Certificates and outside awards are scattered across folders and emails.</span>
+                        </label>
+                        <label class="border border-[#D9D3C7] rounded-lg p-3.5 flex items-center gap-3 cursor-pointer hover:bg-[#F7F5F0]">
+                            <input type="radio" name="triageFriction" value="schools" class="text-neutral-900">
+                            <span class="text-sm">Don't know which secondary schools fit my child's specific talent domain.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-neutral-100 flex justify-end">
+                    <button onclick="completeTriage()" class="bg-neutral-900 text-[#F7F5F0] hover:bg-neutral-800 px-6 py-3 rounded-lg text-sm font-medium transition-colors shadow-sm">
+                        Generate Triage Report & Free Account →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Triage Result Box (Hidden by default) -->
+            <div id="triageResult" class="bg-white border border-[#D9D3C7] rounded-xl p-8 shadow-sm space-y-6 hidden">
+                <div class="flex items-center justify-between border-b border-neutral-100 pb-4">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-bold">Triage Assessment Complete</span>
+                        <h3 class="font-serif-display text-2xl text-neutral-900 mt-1">Recommended Strategy: Pro Pathway</h3>
+                    </div>
+                    <span class="px-3 py-1 bg-neutral-100 rounded-full text-xs font-medium">Free Starter Vault Active</span>
+                </div>
+                <div class="space-y-3 text-sm text-neutral-700 leading-relaxed">
+                    <p>Based on your profile, your family will benefit most from centralized portfolio vaulting and AI school-fit scanning to eliminate trial-and-error spending.</p>
+                    <ul class="space-y-2 pt-2">
+                        <li class="flex items-center gap-2">✓ <strong>Immediate action:</strong> Upload your child's top 3 competition results into the Vault.</li>
+                        <li class="flex items-center gap-2">✓ <strong>Milestone check:</strong> Book your first junior consultant session before the May application window.</li>
+                    </ul>
+                </div>
+                <div class="pt-4 border-t border-neutral-100 flex gap-4">
+                    <button onclick="switchTab('vault')" class="bg-neutral-900 text-[#F7F5F0] hover:bg-neutral-800 px-5 py-2.5 rounded-lg text-sm font-medium">Go to Portfolio Vault</button>
+                    <button onclick="switchTab('pricing')" class="border border-[#D9D3C7] hover:bg-[#F7F5F0] px-5 py-2.5 rounded-lg text-sm font-medium">View Pro Plan ($49.99/mo)</button>
                 </div>
             </div>
         </section>
 
         <!-- SECTION: AI SCHOOL FIT SCAN -->
-        <section id="tab-scanner" class="tab-content max-w-5xl mx-auto space-y-8 hidden">
-            <div class="border-b border-neutral-800 pb-6">
-                <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">AI School-Fit Scan</h2>
-                <p class="text-neutral-400 text-sm mt-1">Analyze your child's portfolio vault against Singapore secondary schools and DSA talent areas[cite: 1].</p>
+        <section id="tab-scanner" class="tab-content max-w-4xl mx-auto space-y-8 hidden">
+            <div class="border-b border-[#D9D3C7] pb-6">
+                <h2 class="font-serif-display text-4xl font-bold tracking-tight text-neutral-900">AI School-Fit Scan</h2>
+                <p class="text-neutral-600 text-sm mt-1">Analyze your child's portfolio vault against Singapore secondary schools and DSA talent areas[cite: 1].</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Scan Control Panel -->
-                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl space-y-4 md:col-span-1">
-                    <h3 class="font-serif-display text-2xl text-[#E5E0D8]">Select Target School</h3>
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl space-y-4 md:col-span-1 shadow-sm">
+                    <h3 class="font-serif-display text-xl font-bold text-neutral-900">Select Target School</h3>
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2">School & Domain</label>
-                        <select id="targetSchoolSelect" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-3 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
+                        <label class="block text-xs uppercase tracking-wider text-neutral-600 mb-2">School & Domain</label>
+                        <select id="targetSchoolSelect" class="w-full bg-[#F7F5F0] border border-[#D9D3C7] text-sm rounded-lg p-3 text-neutral-900 focus:outline-none focus:border-neutral-900">
                             <option value="hci">Raffles Institution / HCI — Robotics & Coding</option>
                             <option value="acs">ACS (Independent) — Mathematics / STEM</option>
                             <option value="nygh">Nanyang Girls' High — Info-Comm Technology</option>
                             <option value="sst">School of Science and Technology — Applied Sciences</option>
                         </select>
                     </div>
-                    <button onclick="runAiScan()" class="w-full bg-[#E5E0D8] text-black hover:bg-neutral-200 py-3 rounded-lg text-sm font-medium transition-colors">
+                    <button onclick="runAiScan()" class="w-full bg-neutral-900 text-[#F7F5F0] hover:bg-neutral-800 py-3 rounded-lg text-sm font-medium transition-colors shadow-sm">
                         Run Compatibility Scan
                     </button>
-                    <div class="p-3 bg-neutral-900 rounded-lg border border-neutral-800 text-xs text-neutral-400 leading-relaxed">
-                        <strong class="text-[#E5E0D8]">Note:</strong> AI scanner evaluates depth of sustained involvement, competition wins, and alignment with MOE DSA selection criteria.
+                    <div class="p-3 bg-[#F7F5F0] rounded-lg border border-[#D9D3C7] text-xs text-neutral-600 leading-relaxed">
+                        <strong class="text-neutral-900">Note:</strong> AI scanner evaluates depth of sustained involvement, competition wins, and alignment with MOE DSA selection criteria.
                     </div>
                 </div>
 
-                <!-- Scan Results Panel -->
-                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl space-y-6 md:col-span-2 flex flex-col justify-between" id="scanResultsContainer">
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl space-y-6 md:col-span-2 flex flex-col justify-between shadow-sm">
                     <div>
-                        <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+                        <div class="flex items-center justify-between border-b border-neutral-100 pb-4">
                             <div>
-                                <span class="text-xs uppercase tracking-wider text-neutral-400">Match Compatibility Score</span>
-                                <h3 id="resultSchoolName" class="font-serif-display text-3xl text-[#E5E0D8] mt-1">Raffles Institution / HCI</h3>
+                                <span class="text-xs uppercase tracking-wider text-neutral-600">Match Compatibility Score</span>
+                                <h3 id="resultSchoolName" class="font-serif-display text-2xl font-bold text-neutral-900 mt-1">Raffles Institution / HCI</h3>
                             </div>
-                            <div id="resultScoreBadge" class="px-4 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-2xl font-serif-display text-[#E5E0D8]">84% Match</div>
+                            <div id="resultScoreBadge" class="px-4 py-2 bg-[#F7F5F0] border border-[#D9D3C7] rounded-lg text-xl font-serif-display font-bold text-neutral-900">84% Match</div>
                         </div>
 
                         <div class="mt-6 space-y-4">
                             <div>
-                                <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">Portfolio Strengths</h4>
-                                <ul id="resultStrengths" class="space-y-2 text-sm text-neutral-300">
+                                <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-600 mb-2">Portfolio Strengths</h4>
+                                <ul id="resultStrengths" class="space-y-2 text-sm text-neutral-700">
                                     <li class="flex items-start gap-2">✓ Strong sustained leadership in infocomm club across P4 to P5.</li>
                                     <li class="flex items-start gap-2">✓ Verified national coding competition podium finish.</li>
                                 </ul>
                             </div>
 
                             <div>
-                                <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">Identified Gaps & Recommended Next Steps</h4>
-                                <ul id="resultGaps" class="space-y-2 text-sm text-neutral-300">
+                                <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-600 mb-2">Identified Gaps & Recommended Next Steps</h4>
+                                <ul id="resultGaps" class="space-y-2 text-sm text-neutral-700">
                                     <li class="flex items-start gap-2">⚠ Missing community service or CIP documentation in tech outreach.</li>
                                     <li class="flex items-start gap-2">➔ Recommendation: Complete 1 more structured project before May trials.</li>
                                 </ul>
@@ -186,159 +263,156 @@
                         </div>
                     </div>
 
-                    <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400">
+                    <div class="pt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-600">
                         <span>Scanned against 2026 MOE criteria dataset</span>
-                        <button onclick="switchTab('pricing')" class="text-[#E5E0D8] underline hover:text-white">Unlock full Pro report & AI reasoning →</button>
+                        <button onclick="switchTab('pricing')" class="text-neutral-900 font-medium underline hover:text-black">Unlock full Pro report & AI reasoning →</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- SECTION: ADMISSIONS TIMELINE -->
-        <section id="tab-timeline" class="tab-content max-w-5xl mx-auto space-y-8 hidden">
-            <div class="border-b border-neutral-800 pb-6">
-                <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">Admissions Timeline & Milestones</h2>
-                <p class="text-neutral-400 text-sm mt-1">Key dates for DSA-Sec, school applications, trials, and portfolio locks[cite: 1].</p>
+        <section id="tab-timeline" class="tab-content max-w-4xl mx-auto space-y-8 hidden">
+            <div class="border-b border-[#D9D3C7] pb-6">
+                <h2 class="font-serif-display text-4xl font-bold tracking-tight text-neutral-900">Admissions Timeline & Milestones</h2>
+                <p class="text-neutral-600 text-sm mt-1">Key dates for DSA-Sec, school applications, trials, and portfolio locks[cite: 1].</p>
             </div>
 
             <div class="space-y-4">
-                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
                     <div>
                         <div class="flex items-center gap-3">
-                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-700 text-xs rounded text-[#E5E0D8]">Milestone 1</span>
-                            <span class="text-xs text-neutral-400">January — April (P5 / P6)</span>
+                            <span class="px-2.5 py-1 bg-[#F7F5F0] border border-[#D9D3C7] text-xs rounded text-neutral-800 font-medium">Milestone 1</span>
+                            <span class="text-xs text-neutral-600">January — April (P5 / P6)</span>
                         </div>
-                        <h3 class="font-serif-display text-2xl text-[#E5E0D8] mt-1">Portfolio Vault Completion & Initial AI Scan</h3>
-                        <p class="text-sm text-neutral-400 mt-1">Finalize outside awards, verify CCA records, and run school-fit diagnostics.</p>
+                        <h3 class="font-serif-display text-xl font-bold text-neutral-900 mt-1">Portfolio Vault Completion & Initial AI Scan</h3>
+                        <p class="text-sm text-neutral-600 mt-1">Finalize outside awards, verify CCA records, and run school-fit diagnostics.</p>
                     </div>
                     <div class="text-right">
-                        <span class="text-xs text-emerald-400 bg-emerald-950 border border-emerald-800 px-3 py-1.5 rounded-lg inline-block">Completed</span>
+                        <span class="text-xs text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg inline-block font-medium">Completed</span>
                     </div>
                 </div>
 
-                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-[#E5E0D8]">
+                <div class="bg-white border border-neutral-900 p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm border-l-4 border-l-neutral-900">
                     <div>
                         <div class="flex items-center gap-3">
-                            <span class="px-2.5 py-1 bg-[#E5E0D8] text-black text-xs rounded font-medium">Milestone 2 (Active)</span>
-                            <span class="text-xs text-neutral-400">May — June</span>
+                            <span class="px-2.5 py-1 bg-neutral-900 text-[#F7F5F0] text-xs rounded font-medium">Milestone 2 (Active)</span>
+                            <span class="text-xs text-neutral-600">May — June</span>
                         </div>
-                        <h3 class="font-serif-display text-2xl text-[#E5E0D8] mt-1">MOE DSA-Sec Application Submission Window</h3>
-                        <p class="text-sm text-neutral-400 mt-1">Submit school choices and talent selections via the official MOE portal.</p>
+                        <h3 class="font-serif-display text-xl font-bold text-neutral-900 mt-1">MOE DSA-Sec Application Submission Window</h3>
+                        <p class="text-sm text-neutral-600 mt-1">Submit school choices and talent selections via the official MOE portal.</p>
                     </div>
                     <div class="text-right">
-                        <button onclick="switchTab('pricing')" class="bg-[#E5E0D8] text-black hover:bg-neutral-200 px-4 py-2 rounded-lg text-xs font-medium transition-colors">Book Milestone Consult</button>
+                        <button onclick="switchTab('pricing')" class="bg-neutral-900 text-[#F7F5F0] hover:bg-neutral-800 px-4 py-2 rounded-lg text-xs font-medium transition-colors shadow-sm">Book Milestone Consult</button>
                     </div>
                 </div>
 
-                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
                     <div>
                         <div class="flex items-center gap-3">
-                            <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-700 text-xs rounded text-neutral-400">Milestone 3</span>
-                            <span class="text-xs text-neutral-400">July — August</span>
+                            <span class="px-2.5 py-1 bg-[#F7F5F0] border border-[#D9D3C7] text-xs rounded text-neutral-600">Milestone 3</span>
+                            <span class="text-xs text-neutral-600">July — August</span>
                         </div>
-                        <h3 class="font-serif-display text-2xl text-[#E5E0D8] mt-1">School Trials, Auditions & Selection Interviews</h3>
-                        <p class="text-sm text-neutral-400 mt-1">Attend institutional trials, portfolio reviews, and face-to-face assessments.</p>
+                        <h3 class="font-serif-display text-xl font-bold text-neutral-900 mt-1">School Trials, Auditions & Selection Interviews</h3>
+                        <p class="text-sm text-neutral-600 mt-1">Attend institutional trials, portfolio reviews, and face-to-face assessments.</p>
                     </div>
                     <div class="text-right">
-                        <span class="text-xs text-neutral-400 bg-neutral-900 border border-neutral-800 px-3 py-1.5 rounded-lg inline-block">Upcoming</span>
+                        <span class="text-xs text-neutral-600 bg-[#F7F5F0] border border-[#D9D3C7] px-3 py-1.5 rounded-lg inline-block">Upcoming</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- SECTION: PRICING & TIERS -->
-        <section id="tab-pricing" class="tab-content max-w-5xl mx-auto space-y-8 hidden">
-            <div class="border-b border-neutral-800 pb-6">
-                <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">Simple Plans & Expert Consults</h2>
-                <p class="text-neutral-400 text-sm mt-1">Free to track. Upgrade for full AI analysis and milestone consultations with experienced educators[cite: 1].</p>
+        <section id="tab-pricing" class="tab-content max-w-4xl mx-auto space-y-8 hidden">
+            <div class="border-b border-[#D9D3C7] pb-6">
+                <h2 class="font-serif-display text-4xl font-bold tracking-tight text-neutral-900">Simple Plans & Expert Consults</h2>
+                <p class="text-neutral-600 text-sm mt-1">Free to track. Upgrade for full AI analysis and milestone consultations with experienced educators[cite: 1].</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Free Tier -->
-                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col justify-between space-y-6">
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl flex flex-col justify-between space-y-6 shadow-sm">
                     <div>
-                        <div class="text-xs uppercase tracking-wider text-neutral-400">Starter</div>
-                        <div class="font-serif-display text-4xl text-[#E5E0D8] mt-2">S$0 <span class="text-sm font-sans text-neutral-400">/ forever</span></div>
-                        <p class="text-xs text-neutral-400 mt-2">Essential tracking for self-directed families.</p>
+                        <div class="text-xs uppercase tracking-wider text-neutral-600 font-semibold">Starter</div>
+                        <div class="font-serif-display text-3xl font-bold text-neutral-900 mt-2">S$0 <span class="text-sm font-sans font-normal text-neutral-600">/ forever</span></div>
+                        <p class="text-xs text-neutral-600 mt-2">Essential tracking for self-directed families.</p>
                         
-                        <ul class="mt-6 space-y-3 text-sm text-neutral-300">
+                        <ul class="mt-6 space-y-3 text-sm text-neutral-700">
                             <li class="flex items-center gap-2">✓ Portfolio vault (limited uploads)</li>
                             <li class="flex items-center gap-2">✓ DSA calendar & reminders</li>
                             <li class="flex items-center gap-2">✓ Basic AI school-fit scan</li>
                             <li class="flex items-center gap-2">✓ Tuition & enrichment directory</li>
                         </ul>
                     </div>
-                    <button class="w-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-[#E5E0D8] py-2.5 rounded-lg text-sm font-medium transition-colors">Current Plan</button>
+                    <button class="w-full bg-[#F7F5F0] hover:bg-[#EDE8DE] border border-[#D9D3C7] text-neutral-900 py-2.5 rounded-lg text-sm font-medium transition-colors">Current Plan</button>
                 </div>
 
-                <!-- Pro Tier -->
-                <div class="bg-neutral-900 border-2 border-[#E5E0D8] p-6 rounded-xl flex flex-col justify-between space-y-6 relative shadow-2xl">
-                    <div class="absolute -top-3 right-6 bg-[#E5E0D8] text-black text-xs px-3 py-0.5 rounded-full font-medium">Most Popular</div>
+                <div class="bg-white border-2 border-neutral-900 p-6 rounded-xl flex flex-col justify-between space-y-6 relative shadow-lg">
+                    <div class="absolute -top-3 right-6 bg-neutral-900 text-[#F7F5F0] text-xs px-3 py-0.5 rounded-full font-medium">Most Popular</div>
                     <div>
-                        <div class="text-xs uppercase tracking-wider text-[#E5E0D8]">Pro Plan</div>
-                        <div class="font-serif-display text-4xl text-[#E5E0D8] mt-2">S$49.99 <span class="text-sm font-sans text-neutral-400">/ month</span></div>
-                        <p class="text-xs text-neutral-400 mt-2">Full software suite plus strategic milestone guidance.</p>
+                        <div class="text-xs uppercase tracking-wider text-neutral-900 font-bold">Pro Plan</div>
+                        <div class="font-serif-display text-3xl font-bold text-neutral-900 mt-2">S$49.99 <span class="text-sm font-sans font-normal text-neutral-600">/ month</span></div>
+                        <p class="text-xs text-neutral-600 mt-2">Full software suite plus strategic milestone guidance.</p>
                         
-                        <ul class="mt-6 space-y-3 text-sm text-neutral-300">
+                        <ul class="mt-6 space-y-3 text-sm text-neutral-700">
                             <li class="flex items-center gap-2">✓ Unlimited portfolio uploads</li>
                             <li class="flex items-center gap-2">✓ Full AI scan with reasons & next steps</li>
                             <li class="flex items-center gap-2">✓ 3 junior consults timed to DSA milestones</li>
                             <li class="flex items-center gap-2">✓ Structured plan from P5 to P6</li>
                         </ul>
                     </div>
-                    <button onclick="alert('Redirecting to secure Stripe checkout for Pro Plan (S$49.99/mo)...')" class="w-full bg-[#E5E0D8] hover:bg-neutral-200 text-black py-2.5 rounded-lg text-sm font-medium transition-colors">Upgrade to Pro</button>
+                    <button onclick="alert('Redirecting to secure Stripe checkout for Pro Plan (S$49.99/mo)...')" class="w-full bg-neutral-950 hover:bg-neutral-800 text-[#F7F5F0] py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm">Upgrade to Pro</button>
                 </div>
 
-                <!-- Elite Tier -->
-                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl flex flex-col justify-between space-y-6">
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl flex flex-col justify-between space-y-6 shadow-sm">
                     <div>
-                        <div class="text-xs uppercase tracking-wider text-neutral-400">Elite Plan</div>
-                        <div class="font-serif-display text-4xl text-[#E5E0D8] mt-2">S$99.99 <span class="text-sm font-sans text-neutral-400">/ month</span></div>
-                        <p class="text-xs text-neutral-400 mt-2">Comprehensive coverage through secondary and post-secondary transitions.</p>
+                        <div class="text-xs uppercase tracking-wider text-neutral-600 font-semibold">Elite Plan</div>
+                        <div class="font-serif-display text-3xl font-bold text-neutral-900 mt-2">S$99.99 <span class="text-sm font-sans font-normal text-neutral-600">/ month</span></div>
+                        <p class="text-xs text-neutral-600 mt-2">Comprehensive coverage through secondary and post-secondary transitions.</p>
                         
-                        <ul class="mt-6 space-y-3 text-sm text-neutral-300">
+                        <ul class="mt-6 space-y-3 text-sm text-neutral-700">
                             <li class="flex items-center gap-2">✓ Everything in Pro</li>
                             <li class="flex items-center gap-2">✓ 6 senior consults a year</li>
                             <li class="flex items-center gap-2">✓ Alerts for DSA-JC, Poly EAE, uni & scholarships</li>
                             <li class="flex items-center gap-2">✓ Partner centre past-results filtering</li>
                         </ul>
                     </div>
-                    <button onclick="alert('Redirecting to secure Stripe checkout for Elite Plan (S$99.99/mo)...')" class="w-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-[#E5E0D8] py-2.5 rounded-lg text-sm font-medium transition-colors">Upgrade to Elite</button>
+                    <button onclick="alert('Redirecting to secure Stripe checkout for Elite Plan (S$99.99/mo)...')" class="w-full bg-[#F7F5F0] hover:bg-[#EDE8DE] border border-[#D9D3C7] text-neutral-900 py-2.5 rounded-lg text-sm font-medium transition-colors">Upgrade to Elite</button>
                 </div>
             </div>
         </section>
 
         <!-- SECTION: PARTNER DIRECTORY -->
-        <section id="tab-partners" class="tab-content max-w-5xl mx-auto space-y-8 hidden">
-            <div class="border-b border-neutral-800 pb-6">
-                <h2 class="font-serif-display text-4xl md:text-5xl font-normal tracking-tight text-[#E5E0D8]">Partner Enrichment Directory</h2>
-                <p class="text-neutral-400 text-sm mt-1">Pre-screened tuition and enrichment partners specializing in DSA domain preparation[cite: 1].</p>
+        <section id="tab-partners" class="tab-content max-w-4xl mx-auto space-y-8 hidden">
+            <div class="border-b border-[#D9D3C7] pb-6">
+                <h2 class="font-serif-display text-4xl font-bold tracking-tight text-neutral-900">Partner Enrichment Directory</h2>
+                <p class="text-neutral-600 text-sm mt-1">Pre-screened tuition and enrichment partners specializing in DSA domain preparation[cite: 1].</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl space-y-4">
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl space-y-4 shadow-sm">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs bg-neutral-900 border border-neutral-700 px-2.5 py-1 rounded text-neutral-300">STEM & Robotics</span>
-                        <span class="text-xs text-neutral-400">Verified Partner</span>
+                        <span class="text-xs bg-[#F7F5F0] border border-[#D9D3C7] px-2.5 py-1 rounded text-neutral-800 font-medium">STEM & Robotics</span>
+                        <span class="text-xs text-emerald-700 font-medium">Verified Partner</span>
                     </div>
-                    <h3 class="font-serif-display text-2xl text-[#E5E0D8]">Ancourage Academy</h3>
-                    <p class="text-sm text-neutral-400">Specialized applied programming, Arduino engineering, and competition training tailored for DSA-Sec STEM portfolios.</p>
-                    <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400">
+                    <h3 class="font-serif-display text-2xl font-bold text-neutral-900">Ancourage Academy</h3>
+                    <p class="text-sm text-neutral-600">Specialized applied programming, Arduino engineering, and competition training tailored for DSA-Sec STEM portfolios.</p>
+                    <div class="pt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-600">
                         <span>One-North / Bukit Timah</span>
-                        <button onclick="alert('Contacting partner centre via OpenJio referral program...')" class="text-[#E5E0D8] underline hover:text-white">Request Partner Intro →</button>
+                        <button onclick="alert('Contacting partner centre via OpenJio referral program...')" class="text-neutral-900 font-medium underline hover:text-black">Request Partner Intro →</button>
                     </div>
                 </div>
 
-                <div class="bg-neutral-950 border border-neutral-800 p-6 rounded-xl space-y-4">
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl space-y-4 shadow-sm">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs bg-neutral-900 border border-neutral-700 px-2.5 py-1 rounded text-neutral-300">Languages & Debating</span>
-                        <span class="text-xs text-neutral-400">Verified Partner</span>
+                        <span class="text-xs bg-[#F7F5F0] border border-[#D9D3C7] px-2.5 py-1 rounded text-neutral-800 font-medium">Languages & Debating</span>
+                        <span class="text-xs text-emerald-700 font-medium">Verified Partner</span>
                     </div>
-                    <h3 class="font-serif-display text-2xl text-[#E5E0D8]">Orator & Minds Enrichment</h3>
-                    <p class="text-sm text-neutral-400">Competitive public speaking, Model United Nations, and structured essay writing for Humanities & Languages DSA tracks.</p>
-                    <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400">
+                    <h3 class="font-serif-display text-2xl font-bold text-neutral-900">Orator & Minds Enrichment</h3>
+                    <p class="text-sm text-neutral-600">Competitive public speaking, Model United Nations, and structured essay writing for Humanities & Languages DSA tracks.</p>
+                    <div class="pt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-600">
                         <span>Orchard / Bugis</span>
-                        <button onclick="alert('Contacting partner centre via OpenJio referral program...')" class="text-[#E5E0D8] underline hover:text-white">Request Partner Intro →</button>
+                        <button onclick="alert('Contacting partner centre via OpenJio referral program...')" class="text-neutral-900 font-medium underline hover:text-black">Request Partner Intro →</button>
                     </div>
                 </div>
             </div>
@@ -347,21 +421,21 @@
     </main>
 
     <!-- MODAL: ADD RECORD -->
-    <div id="addModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-neutral-950 border border-neutral-800 rounded-2xl max-w-lg w-full p-6 space-y-6">
-            <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
-                <h3 class="font-serif-display text-2xl text-[#E5E0D8]">Add Portfolio Achievement</h3>
-                <button onclick="closeAddModal()" class="text-neutral-400 hover:text-white">&times;</button>
+    <div id="addModal" class="fixed inset-0 bg-neutral-900/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border border-[#D9D3C7] rounded-2xl max-w-lg w-full p-6 space-y-6 shadow-xl">
+            <div class="flex items-center justify-between border-b border-neutral-100 pb-4">
+                <h3 class="font-serif-display text-2xl font-bold text-neutral-900">Add Portfolio Achievement</h3>
+                <button onclick="closeAddModal()" class="text-neutral-500 hover:text-neutral-900 text-lg">&times;</button>
             </div>
             <form id="addRecordForm" onsubmit="handleRecordSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Achievement Title</label>
-                    <input type="text" id="recTitle" required placeholder="e.g. National Junior Robotics Championship - Gold" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-600 mb-1 font-medium">Achievement Title</label>
+                    <input type="text" id="recTitle" required placeholder="e.g. National Junior Robotics Championship - Gold" class="w-full bg-[#F7F5F0] border border-[#D9D3C7] text-sm rounded-lg p-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900">
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Category</label>
-                        <select id="recCategory" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
+                        <label class="block text-xs uppercase tracking-wider text-neutral-600 mb-1 font-medium">Category</label>
+                        <select id="recCategory" class="w-full bg-[#F7F5F0] border border-[#D9D3C7] text-sm rounded-lg p-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900">
                             <option value="STEM">STEM & Innovation</option>
                             <option value="Leadership">Leadership & Uniformed</option>
                             <option value="Sports">Sports & Games</option>
@@ -370,17 +444,17 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Year / Milestone</label>
-                        <input type="text" id="recYear" required placeholder="2026 (P5)" class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]">
+                        <label class="block text-xs uppercase tracking-wider text-neutral-600 mb-1 font-medium">Year / Milestone</label>
+                        <input type="text" id="recYear" required placeholder="2026 (P5)" class="w-full bg-[#F7F5F0] border border-[#D9D3C7] text-sm rounded-lg p-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Evidence Description & Verification</label>
-                    <textarea id="recDesc" rows="3" required placeholder="Describe organization, certificate reference, and role..." class="w-full bg-neutral-900 border border-neutral-700 text-sm rounded-lg p-2.5 text-[#E5E0D8] focus:outline-none focus:border-[#E5E0D8]"></textarea>
+                    <label class="block text-xs uppercase tracking-wider text-neutral-600 mb-1 font-medium">Evidence Description & Verification</label>
+                    <textarea id="recDesc" rows="3" required placeholder="Describe organization, certificate reference, and role..." class="w-full bg-[#F7F5F0] border border-[#D9D3C7] text-sm rounded-lg p-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900"></textarea>
                 </div>
                 <div class="flex justify-end gap-3 pt-2">
-                    <button type="button" onclick="closeAddModal()" class="px-4 py-2 bg-neutral-900 border border-neutral-700 text-neutral-300 rounded-lg text-sm">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-[#E5E0D8] text-black font-medium rounded-lg text-sm hover:bg-neutral-200">Save Record</button>
+                    <button type="button" onclick="closeAddModal()" class="px-4 py-2 bg-[#F7F5F0] border border-[#D9D3C7] text-neutral-700 rounded-lg text-sm font-medium">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-neutral-900 text-[#F7F5F0] font-medium rounded-lg text-sm hover:bg-neutral-800">Save Record</button>
                 </div>
             </form>
         </div>
@@ -404,35 +478,47 @@
             document.getElementById('tab-' + tabId).classList.remove('hidden');
 
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('bg-[#E5E0D8]', 'text-black');
-                btn.classList.add('text-neutral-400', 'hover:text-[#E5E0D8]', 'hover:bg-neutral-900');
+                btn.classList.remove('bg-neutral-900', 'text-[#F7F5F0]');
+                btn.classList.add('text-neutral-600', 'hover:text-neutral-900', 'hover:bg-[#E2DCCE]');
             });
-            event.currentTarget.classList.remove('text-neutral-400', 'hover:text-[#E5E0D8]', 'hover:bg-neutral-900');
-            event.currentTarget.classList.add('bg-[#E5E0D8]', 'text-black');
+            event.currentTarget.classList.remove('text-neutral-600', 'hover:text-neutral-900', 'hover:bg-[#E2DCCE]');
+            event.currentTarget.classList.add('bg-neutral-900', 'text-[#F7F5F0]');
         }
 
-        // Render Portfolio Table
+        // Render LinkedIn-style Portfolio Feed
         function renderPortfolio() {
-            const tbody = document.getElementById('portfolioTableBody');
-            tbody.innerHTML = '';
+            const feed = document.getElementById('portfolioFeed');
+            feed.innerHTML = '';
             records.forEach(r => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="p-4">
-                        <div class="font-medium text-[#E5E0D8]">${r.title}</div>
-                        <div class="text-xs text-neutral-400 mt-0.5">${r.desc}</div>
-                    </td>
-                    <td class="p-4"><span class="px-2 py-1 bg-neutral-900 border border-neutral-700 rounded text-xs text-neutral-300">${r.category}</span></td>
-                    <td class="p-4 text-neutral-400">${r.year}</td>
-                    <td class="p-4"><span class="text-xs text-emerald-400 font-medium">${r.verified}</span></td>
-                    <td class="p-4 text-right">
-                        <button onclick="deleteRecord(${r.id})" class="text-neutral-500 hover:text-red-400 text-xs">Remove</button>
-                    </td>
+                const card = document.createElement('div');
+                card.className = 'bg-white border border-[#D9D3C7] rounded-xl p-5 shadow-sm space-y-3';
+                card.innerHTML = `
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-[#F7F5F0] border border-[#D9D3C7] flex items-center justify-center font-bold text-neutral-900 shrink-0">
+                                ${r.category.substring(0,2).toUpperCase()}
+                            </div>
+                            <div>
+                                <h4 class="font-serif-display text-lg font-bold text-neutral-900">${r.title}</h4>
+                                <div class="text-xs text-neutral-600 flex items-center gap-2 mt-0.5">
+                                    <span>Category: <strong class="text-neutral-800">${r.category}</strong></span>
+                                    <span>•</span>
+                                    <span>${r.year}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="deleteRecord(${r.id})" class="text-neutral-400 hover:text-red-600 text-xs font-medium">Delete</button>
+                    </div>
+                    <p class="text-sm text-neutral-700 bg-[#F7F5F0]/50 p-3 rounded-lg border border-[#EBE6DD]">${r.desc}</p>
+                    <div class="flex items-center justify-between pt-2 border-t border-neutral-100 text-xs">
+                        <span class="text-emerald-700 font-medium flex items-center gap-1.5">✓ ${r.verified}</span>
+                        <span class="text-neutral-600">Parent Vault Record</span>
+                    </div>
                 `;
-                tbody.appendChild(tr);
+                feed.appendChild(card);
             });
-            document.getElementById('statTotal').innerText = records.length + ' Items';
-            document.getElementById('recordCount').innerText = 'Showing ' + records.length + ' records';
+            document.getElementById('statTotal').innerText = records.length;
+            document.getElementById('recordCount').innerText = 'Showing ' + records.length + ' achievements';
         }
 
         // Modal Controls
@@ -448,7 +534,7 @@
                 category: document.getElementById('recCategory').value,
                 year: document.getElementById('recYear').value,
                 desc: document.getElementById('recDesc').value,
-                verified: 'Pending Upload'
+                verified: 'Pending Verification'
             };
             records.unshift(newRec);
             renderPortfolio();
@@ -460,6 +546,12 @@
         function deleteRecord(id) {
             records = records.filter(r => r.id !== id);
             renderPortfolio();
+        }
+
+        // Triage Wizard Completion
+        function completeTriage() {
+            document.getElementById('triageWizard').classList.add('hidden');
+            document.getElementById('triageResult').classList.remove('hidden');
         }
 
         // AI Scan simulation
