@@ -115,7 +115,7 @@
             </div>
         </section>
 
-        <!-- SECTION: TRIAGE & SIGNUP (NEW) -->
+        <!-- SECTION: TRIAGE & SIGNUP -->
         <section id="tab-triage" class="tab-content max-w-3xl mx-auto space-y-8 hidden">
             <div class="border-b border-[#D9D3C7] pb-6">
                 <h2 class="font-serif-display text-4xl font-bold tracking-tight text-neutral-900">Family Triage & Onboarding</h2>
@@ -184,7 +184,7 @@
                 </div>
             </div>
 
-            <!-- Triage Result Box (Hidden by default) -->
+            <!-- Triage Result Box -->
             <div id="triageResult" class="bg-white border border-[#D9D3C7] rounded-xl p-8 shadow-sm space-y-6 hidden">
                 <div class="flex items-center justify-between border-b border-neutral-100 pb-4">
                     <div>
@@ -207,7 +207,7 @@
             </div>
         </section>
 
-        <!-- SECTION: AI SCHOOL FIT SCAN -->
+        <!-- SECTION: AI SCHOOL FIT SCAN (Updated with separate School & Domain Dropdowns) -->
         <section id="tab-scanner" class="tab-content max-w-4xl mx-auto space-y-8 hidden">
             <div class="border-b border-[#D9D3C7] pb-6">
                 <h2 class="font-serif-display text-4xl font-bold tracking-tight text-neutral-900">AI School-Fit Scan</h2>
@@ -216,16 +216,29 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl space-y-4 md:col-span-1 shadow-sm">
-                    <h3 class="font-serif-display text-xl font-bold text-neutral-900">Select Target School</h3>
+                    <h3 class="font-serif-display text-xl font-bold text-neutral-900">Scan Parameters</h3>
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-600 mb-2">School & Domain</label>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-600 mb-2">Target Secondary School</label>
                         <select id="targetSchoolSelect" class="w-full bg-[#F7F5F0] border border-[#D9D3C7] text-sm rounded-lg p-3 text-neutral-900 focus:outline-none focus:border-neutral-900">
-                            <option value="hci">Raffles Institution / HCI — Robotics & Coding</option>
-                            <option value="acs">ACS (Independent) — Mathematics / STEM</option>
-                            <option value="nygh">Nanyang Girls' High — Info-Comm Technology</option>
-                            <option value="sst">School of Science and Technology — Applied Sciences</option>
+                            <option value="hci">Raffles Institution / HCI</option>
+                            <option value="acs">ACS (Independent)</option>
+                            <option value="nygh">Nanyang Girls' High School</option>
+                            <option value="sst">School of Science and Technology (SST)</option>
+                            <option value="sota">School of the Arts (SOTA)</option>
                         </select>
                     </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-600 mb-2">DSA Talent Domain</label>
+                        <select id="targetDomainSelect" class="w-full bg-[#F7F5F0] border border-[#D9D3C7] text-sm rounded-lg p-3 text-neutral-900 focus:outline-none focus:border-neutral-900">
+                            <option value="stem">STEM, Robotics & Coding</option>
+                            <option value="math">Mathematics & Science Olympiad</option>
+                            <option value="leadership">Leadership, Uniformed & Community</option>
+                            <option value="arts">Arts, Aesthetics & Debating</option>
+                            <option value="sports">Sports & Games</option>
+                        </select>
+                    </div>
+
                     <button onclick="runAiScan()" class="w-full bg-neutral-900 text-[#F7F5F0] hover:bg-neutral-800 py-3 rounded-lg text-sm font-medium transition-colors shadow-sm">
                         Run Compatibility Scan
                     </button>
@@ -240,24 +253,25 @@
                             <div>
                                 <span class="text-xs uppercase tracking-wider text-neutral-600">Match Compatibility Score</span>
                                 <h3 id="resultSchoolName" class="font-serif-display text-2xl font-bold text-neutral-900 mt-1">Raffles Institution / HCI</h3>
+                                <p id="resultDomainLabel" class="text-xs text-neutral-600 mt-0.5">Domain: STEM, Robotics & Coding</p>
                             </div>
-                            <div id="resultScoreBadge" class="px-4 py-2 bg-[#F7F5F0] border border-[#D9D3C7] rounded-lg text-xl font-serif-display font-bold text-neutral-900">84% Match</div>
+                            <div id="resultScoreBadge" class="px-4 py-2 bg-[#F7F5F0] border border-[#D9D3C7] rounded-lg text-xl font-serif-display font-bold text-neutral-900">89% Match</div>
                         </div>
 
                         <div class="mt-6 space-y-4">
                             <div>
                                 <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-600 mb-2">Portfolio Strengths</h4>
                                 <ul id="resultStrengths" class="space-y-2 text-sm text-neutral-700">
-                                    <li class="flex items-start gap-2">✓ Strong sustained leadership in infocomm club across P4 to P5.</li>
-                                    <li class="flex items-start gap-2">✓ Verified national coding competition podium finish.</li>
+                                    <li class="flex items-start gap-2">✓ Outstanding STEM competition record (Gold in Robotics Olympiad).</li>
+                                    <li class="flex items-start gap-2">✓ Leadership experience as Infocomm President.</li>
                                 </ul>
                             </div>
 
                             <div>
                                 <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-600 mb-2">Identified Gaps & Recommended Next Steps</h4>
                                 <ul id="resultGaps" class="space-y-2 text-sm text-neutral-700">
-                                    <li class="flex items-start gap-2">⚠ Missing community service or CIP documentation in tech outreach.</li>
-                                    <li class="flex items-start gap-2">➔ Recommendation: Complete 1 more structured project before May trials.</li>
+                                    <li class="flex items-start gap-2">⚠ Need additional documentation of peer mentorship.</li>
+                                    <li class="flex items-start gap-2">➔ Recommendation: Lock portfolio prior to May MOE submission window.</li>
                                 </ul>
                             </div>
                         </div>
@@ -382,7 +396,7 @@
             </div>
         </section>
 
-        <!-- SECTION: PARTNER DIRECTORY -->
+        <!-- SECTION: PARTNER DIRECTORY (Expanded with more partners) -->
         <section id="tab-partners" class="tab-content max-w-4xl mx-auto space-y-8 hidden">
             <div class="border-b border-[#D9D3C7] pb-6">
                 <h2 class="font-serif-display text-4xl font-bold tracking-tight text-neutral-900">Partner Enrichment Directory</h2>
@@ -390,6 +404,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Partner 1 -->
                 <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl space-y-4 shadow-sm">
                     <div class="flex items-center justify-between">
                         <span class="text-xs bg-[#F7F5F0] border border-[#D9D3C7] px-2.5 py-1 rounded text-neutral-800 font-medium">STEM & Robotics</span>
@@ -399,10 +414,11 @@
                     <p class="text-sm text-neutral-600">Specialized applied programming, Arduino engineering, and competition training tailored for DSA-Sec STEM portfolios.</p>
                     <div class="pt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-600">
                         <span>One-North / Bukit Timah</span>
-                        <button onclick="alert('Contacting partner centre via OpenJio referral program...')" class="text-neutral-900 font-medium underline hover:text-black">Request Partner Intro →</button>
+                        <button onclick="alert('Contacting Ancourage Academy via OpenJio referral program...')" class="text-neutral-900 font-medium underline hover:text-black">Request Partner Intro →</button>
                     </div>
                 </div>
 
+                <!-- Partner 2 -->
                 <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl space-y-4 shadow-sm">
                     <div class="flex items-center justify-between">
                         <span class="text-xs bg-[#F7F5F0] border border-[#D9D3C7] px-2.5 py-1 rounded text-neutral-800 font-medium">Languages & Debating</span>
@@ -412,7 +428,35 @@
                     <p class="text-sm text-neutral-600">Competitive public speaking, Model United Nations, and structured essay writing for Humanities & Languages DSA tracks.</p>
                     <div class="pt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-600">
                         <span>Orchard / Bugis</span>
-                        <button onclick="alert('Contacting partner centre via OpenJio referral program...')" class="text-neutral-900 font-medium underline hover:text-black">Request Partner Intro →</button>
+                        <button onclick="alert('Contacting Orator & Minds via OpenJio referral program...')" class="text-neutral-900 font-medium underline hover:text-black">Request Partner Intro →</button>
+                    </div>
+                </div>
+
+                <!-- Partner 3 -->
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl space-y-4 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs bg-[#F7F5F0] border border-[#D9D3C7] px-2.5 py-1 rounded text-neutral-800 font-medium">Mathematics & Olympiads</span>
+                        <span class="text-xs text-emerald-700 font-medium">Verified Partner</span>
+                    </div>
+                    <h3 class="font-serif-display text-2xl font-bold text-neutral-900">MathHub Olympiad Academy</h3>
+                    <p class="text-sm text-neutral-600">Advanced heuristic problem solving and SMO training designed to secure top percentile placements for DSA-Sec Math tracks.</p>
+                    <div class="pt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-600">
+                        <span>Bishan / Novena</span>
+                        <button onclick="alert('Contacting MathHub via OpenJio referral program...')" class="text-neutral-900 font-medium underline hover:text-black">Request Partner Intro →</button>
+                    </div>
+                </div>
+
+                <!-- Partner 4 -->
+                <div class="bg-white border border-[#D9D3C7] p-6 rounded-xl space-y-4 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs bg-[#F7F5F0] border border-[#D9D3C7] px-2.5 py-1 rounded text-neutral-800 font-medium">Aesthetics & Visual Arts</span>
+                        <span class="text-xs text-emerald-700 font-medium">Verified Partner</span>
+                    </div>
+                    <h3 class="font-serif-display text-2xl font-bold text-neutral-900">Atelier Fine Arts Studio</h3>
+                    <p class="text-sm text-neutral-600">Portfolio curation, portfolio sketching, and mixed-media training for SOTA and secondary art DSA auditions.</p>
+                    <div class="pt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-600">
+                        <span>Bras Basah / Dhoby Ghaut</span>
+                        <button onclick="alert('Contacting Atelier Fine Arts via OpenJio referral program...')" class="text-neutral-900 font-medium underline hover:text-black">Request Partner Intro →</button>
                     </div>
                 </div>
             </div>
@@ -420,11 +464,11 @@
 
     </main>
 
-    <!-- MODAL: ADD RECORD -->
+    <!-- MODAL: ADD / EDIT RECORD -->
     <div id="addModal" class="fixed inset-0 bg-neutral-900/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
         <div class="bg-white border border-[#D9D3C7] rounded-2xl max-w-lg w-full p-6 space-y-6 shadow-xl">
             <div class="flex items-center justify-between border-b border-neutral-100 pb-4">
-                <h3 class="font-serif-display text-2xl font-bold text-neutral-900">Add Portfolio Achievement</h3>
+                <h3 id="modalTitle" class="font-serif-display text-2xl font-bold text-neutral-900">Add Portfolio Achievement</h3>
                 <button onclick="closeAddModal()" class="text-neutral-500 hover:text-neutral-900 text-lg">&times;</button>
             </div>
             <form id="addRecordForm" onsubmit="handleRecordSubmit(event)" class="space-y-4">
@@ -472,6 +516,8 @@
             { id: 6, title: 'School Infocomm Club President', category: 'STEM', year: '2026', desc: 'Conducted Python programming workshops for juniors.', verified: 'CCA Record' }
         ];
 
+        let currentEditId = null;
+
         // Tab Switching Logic
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -485,7 +531,7 @@
             event.currentTarget.classList.add('bg-neutral-900', 'text-[#F7F5F0]');
         }
 
-        // Render LinkedIn-style Portfolio Feed
+        // Render LinkedIn-style Portfolio Feed with Edit & Delete
         function renderPortfolio() {
             const feed = document.getElementById('portfolioFeed');
             feed.innerHTML = '';
@@ -507,7 +553,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button onclick="deleteRecord(${r.id})" class="text-neutral-400 hover:text-red-600 text-xs font-medium">Delete</button>
+                        <div class="flex items-center gap-3">
+                            <button onclick="openEditModal(${r.id})" class="text-neutral-500 hover:text-neutral-900 text-xs font-medium">Edit</button>
+                            <button onclick="deleteRecord(${r.id})" class="text-neutral-400 hover:text-red-600 text-xs font-medium">Delete</button>
+                        </div>
                     </div>
                     <p class="text-sm text-neutral-700 bg-[#F7F5F0]/50 p-3 rounded-lg border border-[#EBE6DD]">${r.desc}</p>
                     <div class="flex items-center justify-between pt-2 border-t border-neutral-100 text-xs">
@@ -522,21 +571,60 @@
         }
 
         // Modal Controls
-        function openAddModal() { document.getElementById('addModal').classList.remove('hidden'); document.getElementById('addModal').classList.add('flex'); }
-        function closeAddModal() { document.getElementById('addModal').classList.add('hidden'); document.getElementById('addModal').classList.remove('flex'); }
+        function openAddModal() {
+            currentEditId = null;
+            document.getElementById('modalTitle').innerText = 'Add Portfolio Achievement';
+            document.getElementById('addRecordForm').reset();
+            document.getElementById('addModal').classList.remove('hidden'); 
+            document.getElementById('addModal').classList.add('flex'); 
+        }
 
-        // Handle Add Record Form
+        function openEditModal(id) {
+            currentEditId = id;
+            document.getElementById('modalTitle').innerText = 'Edit Portfolio Achievement';
+            const rec = records.find(r => r.id === id);
+            if (rec) {
+                document.getElementById('recTitle').value = rec.title;
+                document.getElementById('recCategory').value = rec.category;
+                document.getElementById('recYear').value = rec.year;
+                document.getElementById('recDesc').value = rec.desc;
+            }
+            document.getElementById('addModal').classList.remove('hidden'); 
+            document.getElementById('addModal').classList.add('flex'); 
+        }
+
+        function closeAddModal() { 
+            document.getElementById('addModal').classList.add('hidden'); 
+            document.getElementById('addModal').classList.remove('flex'); 
+        }
+
+        // Handle Add / Edit Form Submit
         function handleRecordSubmit(e) {
             e.preventDefault();
-            const newRec = {
-                id: Date.now(),
-                title: document.getElementById('recTitle').value,
-                category: document.getElementById('recCategory').value,
-                year: document.getElementById('recYear').value,
-                desc: document.getElementById('recDesc').value,
-                verified: 'Pending Verification'
-            };
-            records.unshift(newRec);
+            const title = document.getElementById('recTitle').value;
+            const category = document.getElementById('recCategory').value;
+            const year = document.getElementById('recYear').value;
+            const desc = document.getElementById('recDesc').value;
+
+            if (currentEditId !== null) {
+                records = records.map(r => {
+                    if (r.id === currentEditId) {
+                        return { ...r, title, category, year, desc };
+                    }
+                    return r;
+                });
+            } else {
+                const newRec = {
+                    id: Date.now(),
+                    title,
+                    category,
+                    year,
+                    desc,
+                    verified: 'Pending Verification'
+                };
+                records.unshift(newRec);
+            }
+
             renderPortfolio();
             closeAddModal();
             document.getElementById('addRecordForm').reset();
@@ -554,29 +642,33 @@
             document.getElementById('triageResult').classList.remove('hidden');
         }
 
-        // AI Scan simulation
+        // AI Scan simulation with separate School & Domain Dropdowns
         function runAiScan() {
-            const school = document.getElementById('targetSchoolSelect').value;
+            const schoolSelect = document.getElementById('targetSchoolSelect');
+            const domainSelect = document.getElementById('targetDomainSelect');
+            
+            const schoolNameText = schoolSelect.options[schoolSelect.selectedIndex].text;
+            const domainNameText = domainSelect.options[domainSelect.selectedIndex].text;
+
+            document.getElementById('resultSchoolName').innerText = schoolNameText;
+            document.getElementById('resultDomainLabel').innerText = 'Domain: ' + domainNameText;
+            
             const scoreBadge = document.getElementById('resultScoreBadge');
-            const schoolName = document.getElementById('resultSchoolName');
             const strengths = document.getElementById('resultStrengths');
             const gaps = document.getElementById('resultGaps');
 
-            if (school === 'hci') {
-                schoolName.innerText = 'Raffles Institution / HCI';
+            if (schoolSelect.value === 'hci') {
                 scoreBadge.innerText = '89% Match';
-                strengths.innerHTML = `<li class="flex items-start gap-2">✓ Outstanding STEM competition record (Gold in Robotics Olympiad).</li><li class="flex items-start gap-2">✓ Leadership experience as Infocomm President.</li>`;
-                gaps.innerHTML = `<li class="flex items-start gap-2">⚠ Need additional documentation of peer mentorship.</li><li class="flex items-start gap-2">➔ Recommendation: Lock portfolio prior to May MOE submission window.</li>`;
-            } else if (school === 'acs') {
-                schoolName.innerText = 'ACS (Independent) — STEM';
-                scoreBadge.innerText = '82% Match';
-                strengths.innerHTML = `<li class="flex items-start gap-2">✓ Strong Olympiad performance in mathematics.</li><li class="flex items-start gap-2">✓ Solid holistic CCA involvement.</li>`;
-                gaps.innerHTML = `<li class="flex items-start gap-2">⚠ Consider adding community service project evidence.</li>`;
+                strengths.innerHTML = `<li class="flex items-start gap-2">✓ Outstanding track alignment with ${domainNameText}.</li><li class="flex items-start gap-2">✓ Verified competition record & leadership experience.</li>`;
+                gaps.innerHTML = `<li class="flex items-start gap-2">⚠ Recommend adding 1 more community or peer recommendation.</li><li class="flex items-start gap-2">➔ Recommendation: Lock portfolio prior to May MOE submission window.</li>`;
+            } else if (schoolSelect.value === 'acs') {
+                scoreBadge.innerText = '84% Match';
+                strengths.innerHTML = `<li class="flex items-start gap-2">✓ Strong portfolio alignment for ${schoolNameText}.</li><li class="flex items-start gap-2">✓ Solid holistic CCA and leadership involvements.</li>`;
+                gaps.innerHTML = `<li class="flex items-start gap-2">⚠ Consider highlighting specific project milestones in ${domainNameText}.</li>`;
             } else {
-                schoolName.innerText = 'School / Domain Target';
-                scoreBadge.innerText = '78% Match';
-                strengths.innerHTML = `<li class="flex items-start gap-2">✓ Balanced portfolio across multiple domains.</li>`;
-                gaps.innerHTML = `<li class="flex items-start gap-2">➔ Focus on depth in your primary talent area.</li>`;
+                scoreBadge.innerText = '81% Match';
+                strengths.innerHTML = `<li class="flex items-start gap-2">✓ Well-balanced profile matching core criteria for ${schoolNameText}.</li>`;
+                gaps.innerHTML = `<li class="flex items-start gap-2">➔ Focus on depth and verified certificates in your primary domain.</li>`;
             }
         }
 
